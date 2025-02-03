@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.cargo.features": [
+        "src_polars_0_45",
+        "dst_polars_0_46"
+    ]
+}

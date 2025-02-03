@@ -1,0 +1,23 @@
+[package]
+name = "df-interchange"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+doctest = false
+
+[dependencies]
+# polars_0_32 = { package = "polars", version = "0.32", optional = true}
+
+polars_0_45 = { package = "polars", version = "0.45", optional = true}
+polars_arrow_0_45 = { package = "polars-arrow", version = "0.45", optional = true}
+
+polars_0_46 = { package = "polars", version = "0.46", optional = true}
+polars_arrow_0_46 = { package = "polars-arrow", version = "0.46", optional = true}
+
+[features]
+src_polars_0_45 = ["polars_0_45", "polars_arrow_0_45"]
+dst_polars_0_46 = ["polars_0_46", "polars_arrow_0_46"]
+
+[dev-dependencies]
+connectorx = {version = "0.3.3", features = ["src_dummy", "dst_arrow2"]}
