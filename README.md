@@ -14,3 +14,6 @@ error[E0308]: mismatched types
     |
     = note: `polars_core::frame::DataFrame` and `polars::prelude::DataFrame` have similar names, but are actually distinct types
 ```
+
+# TODO 
+[ ] Make test come from code instead of Parquet

@@ -20,4 +20,4 @@ src_polars_0_45 = ["polars_0_45", "polars_arrow_0_45"]
 dst_polars_0_46 = ["polars_0_46", "polars_arrow_0_46"]
 
 [dev-dependencies]
-connectorx = {version = "0.3.3", features = ["src_dummy", "dst_arrow2"]}
+polars_0_45 = { package = "polars", version = "0.45", features = ["parquet"]}
