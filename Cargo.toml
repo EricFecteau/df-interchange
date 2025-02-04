@@ -7,17 +7,38 @@ edition = "2021"
 doctest = false
 
 [dependencies]
-# polars_0_32 = { package = "polars", version = "0.32", optional = true}
 
+# Polars 0.43
+polars_0_43 = { package = "polars", version = "0.43", optional = true}
+polars_arrow_0_43 = { package = "polars-arrow", version = "0.43", optional = true}
+
+# Polars 0.44
+polars_0_44 = { package = "polars", version = "0.44", optional = true}
+polars_arrow_0_44 = { package = "polars-arrow", version = "0.44", optional = true}
+
+# Polars 0.45
 polars_0_45 = { package = "polars", version = "0.45", optional = true}
 polars_arrow_0_45 = { package = "polars-arrow", version = "0.45", optional = true}
 
+# Polars 0.46
 polars_0_46 = { package = "polars", version = "0.46", optional = true}
 polars_arrow_0_46 = { package = "polars-arrow", version = "0.46", optional = true}
 
 [features]
+# Polars 0.43
+src_polars_0_43 = ["polars_0_43", "polars_arrow_0_43"]
+dst_polars_0_43 = ["polars_0_43", "polars_arrow_0_43"]
+
+# Polars 0.44
+src_polars_0_44 = ["polars_0_44", "polars_arrow_0_44"]
+dst_polars_0_44 = ["polars_0_44", "polars_arrow_0_44"]
+
+# Polars 0.45
 src_polars_0_45 = ["polars_0_45", "polars_arrow_0_45"]
+dst_polars_0_45 = ["polars_0_45", "polars_arrow_0_45"]
+
+# Polars 0.46
+src_polars_0_46 = ["polars_0_46", "polars_arrow_0_46"]
 dst_polars_0_46 = ["polars_0_46", "polars_arrow_0_46"]
 
 [dev-dependencies]
-polars_0_45 = { package = "polars", version = "0.45", features = ["parquet"]}
