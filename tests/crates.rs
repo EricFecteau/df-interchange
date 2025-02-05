@@ -1,9 +1,9 @@
-use polars_0_45::prelude::*;
+// use polars_0_45::prelude::*;
 
 // use connectorx::prelude::*;
 // use connectorx::sources::dummy::DummyTypeSystem;
 // use connectorx::transports::DummyArrow2Transport;
-use df_interchange::polars_to_polars;
+// use df_interchange::polars_to_polars;
 // use polars_0_46::prelude::*;
 
 // #[test]

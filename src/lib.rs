@@ -46,7 +46,11 @@ fn polars_to_ffi(
     let mut src_ffi = Vec::with_capacity(num_cols);
 
     // Vectors of src series
-    #[cfg(any(feature = "src_polars_0_44", feature = "src_polars_0_45"))]
+    #[cfg(any(
+        feature = "src_polars_0_44",
+        feature = "src_polars_0_45",
+        feature = "src_polars_0_46"
+    ))]
     let src_series: Vec<src_polars::series::Series> = src_df
         .take_columns()
         .into_iter()
