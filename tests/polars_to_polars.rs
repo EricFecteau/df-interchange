@@ -1,43 +1,58 @@
 mod common;
-use df_interchange::polars_to_polars;
+use df_interchange::Interchange;
+use paste::paste;
 
-#[test]
-fn test_polars_to_polars() {
-    let src_df = common::src_polars_data();
-    let converted_df = polars_to_polars(src_df);
-    let dst_df = common::dst_polars_data();
+macro_rules! test_polars_to_polars {
+    ($from_ver:literal, $to_ver:literal) => {
+        paste! {
+            #[test]
+            pub fn [<test_polars_ $from_ver _to_ $to_ver>]() {
+                let src_df = common::[<polars_data_ $from_ver>]();
+                let converted_df = Interchange::[<from_polars_ $from_ver>](src_df).[<to_polars_ $to_ver>]();
+                let dst_df = common::[<polars_data_ $to_ver>]();
 
-    assert!(dst_df.equals_missing(&converted_df));
+                assert!(dst_df.equals_missing(&converted_df));
+            }
+
+        }
+    };
 }
 
-#[test]
-fn test_polars_versions() {
-    let src_version = common::src_polars_version();
-    let dst_version = common::dst_polars_version();
+#[cfg(all(feature = "polars_0_42", feature = "polars_0_43"))]
+test_polars_to_polars!("0_42", "0_43");
 
-    // Source
-    #[cfg(feature = "src_polars_0_43")]
-    assert_eq!(src_version, "43");
+#[cfg(all(feature = "polars_0_42", feature = "polars_0_43"))]
+test_polars_to_polars!("0_43", "0_42");
 
-    #[cfg(feature = "src_polars_0_44")]
-    assert_eq!(src_version, "44");
+#[cfg(all(feature = "polars_0_43", feature = "polars_0_44"))]
+test_polars_to_polars!("0_43", "0_44");
 
-    #[cfg(feature = "src_polars_0_45")]
-    assert_eq!(src_version, "45");
+#[cfg(all(feature = "polars_0_43", feature = "polars_0_44"))]
+test_polars_to_polars!("0_44", "0_43");
 
-    #[cfg(feature = "src_polars_0_46")]
-    assert_eq!(src_version, "46");
+#[cfg(all(feature = "polars_0_44", feature = "polars_0_45"))]
+test_polars_to_polars!("0_44", "0_45");
 
-    // Destination
-    #[cfg(feature = "dst_polars_0_43")]
-    assert_eq!(dst_version, "43");
+#[cfg(all(feature = "polars_0_44", feature = "polars_0_45"))]
+test_polars_to_polars!("0_45", "0_44");
 
-    #[cfg(feature = "dst_polars_0_44")]
-    assert_eq!(dst_version, "44");
+#[cfg(all(feature = "polars_0_45", feature = "polars_0_46"))]
+test_polars_to_polars!("0_45", "0_46");
 
-    #[cfg(feature = "dst_polars_0_45")]
-    assert_eq!(dst_version, "45");
+#[cfg(all(feature = "polars_0_45", feature = "polars_0_46"))]
+test_polars_to_polars!("0_46", "0_45");
 
-    #[cfg(feature = "dst_polars_0_46")]
-    assert_eq!(dst_version, "46");
-}
+// #[test]
+// #[cfg(all(
+//     feature = "polars_0_44",
+//     feature = "polars_0_45",
+//     feature = "polars_0_46"
+// ))]
+// fn test_polars_0_44_0_45_0_46() {
+//     let src1_df = common::polars_data_0_44();
+//     let src2_df = common::polars_data_0_45();
+//     let c1_df = Interchange::from_polars_0_44(src1_df).to_polars_0_46();
+//     let c2_df = Interchange::from_polars_0_45(src2_df).to_polars_0_46();
+
+//     assert!(c1_df.equals_missing(&c2_df));
+// }
