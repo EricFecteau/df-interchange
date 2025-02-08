@@ -3,7 +3,6 @@ use std::mem::transmute;
 
 use crate::{ArrowArray, ArrowSchema, Interchange};
 
-#[allow(unused_macros)]
 macro_rules! ffi_to_polars {
     ($to_ver:literal) => {
         paste! {
@@ -81,7 +80,6 @@ ffi_to_polars!("0_45");
 #[cfg(feature = "polars_0_46")]
 ffi_to_polars!("0_46");
 
-#[allow(unused_macros)]
 macro_rules! ffi_to_polars {
     ($to_ver:literal) => {
         paste! {
@@ -153,7 +151,6 @@ ffi_to_polars!("0_41");
 #[cfg(feature = "polars_0_42")]
 ffi_to_polars!("0_42");
 
-#[allow(unused_macros)]
 macro_rules! ffi_to_polars {
     ($to_ver:literal) => {
         paste! {

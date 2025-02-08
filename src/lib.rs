@@ -1,5 +1,30 @@
 #![allow(clippy::useless_transmute)]
+#![allow(dead_code)]
+#![allow(unused_macros)]
+
+#[cfg(any(feature = "arrow_53", feature = "arrow_54"))]
+mod from_arrow;
+
+#[cfg(any(
+    feature = "polars_0_40",
+    feature = "polars_0_41",
+    feature = "polars_0_42",
+    feature = "polars_0_43",
+    feature = "polars_0_44",
+    feature = "polars_0_45",
+    feature = "polars_0_46"
+))]
 mod from_polars;
+
+#[cfg(any(
+    feature = "polars_0_40",
+    feature = "polars_0_41",
+    feature = "polars_0_42",
+    feature = "polars_0_43",
+    feature = "polars_0_44",
+    feature = "polars_0_45",
+    feature = "polars_0_46"
+))]
 mod to_polars;
 
 #[repr(C)]
