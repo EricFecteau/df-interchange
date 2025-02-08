@@ -21,7 +21,7 @@ macro_rules! arrow_to_ffi {
                             let mut ffi: Vec<(String, Vec<(ArrowArray, ArrowSchema)>)> = Vec::with_capacity(num_cols);
 
                             for c in 0..num_cols {
-                                ffi.push((df[0].schema().field(c).name().to_owned(), Vec::with_capacity(num_chunks)));
+                                ffi.push((df[0].schema().field(c).name().clone(), Vec::with_capacity(num_chunks)));
                             }
 
                             for chunk in df {
@@ -32,7 +32,8 @@ macro_rules! arrow_to_ffi {
                                     let array = col.to_data();
 
                                     // Convert to ffi
-                                    let (ffi_array, ffi_schema) = [<arrow_crate_ $from_ver>]::ffi::to_ffi(&array).unwrap();
+                                    let ffi_schema = [<arrow_crate_ $from_ver>]::ffi::FFI_ArrowSchema::try_from(chunk.schema().field(col_num)).unwrap();
+                                    let (ffi_array, _) = [<arrow_crate_ $from_ver>]::ffi::to_ffi(&array).unwrap();
 
                                     // Convert ffi array from arrow-rs to this crate's version of ArrowArray
                                     let ffi_array = unsafe { transmute::<[<arrow_crate_ $from_ver>]::ffi::FFI_ArrowArray, ArrowArray>(ffi_array) };

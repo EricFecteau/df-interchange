@@ -2,7 +2,13 @@
 #![allow(dead_code)]
 #![allow(unused_macros)]
 
-#[cfg(any(feature = "arrow_53", feature = "arrow_54"))]
+#[cfg(any(
+    feature = "arrow_50",
+    feature = "arrow_51",
+    feature = "arrow_52",
+    feature = "arrow_53",
+    feature = "arrow_54"
+))]
 mod from_arrow;
 
 #[cfg(any(
@@ -15,6 +21,15 @@ mod from_arrow;
     feature = "polars_0_46"
 ))]
 mod from_polars;
+
+#[cfg(any(
+    feature = "arrow_50",
+    feature = "arrow_51",
+    feature = "arrow_52",
+    feature = "arrow_53",
+    feature = "arrow_54"
+))]
+mod to_arrow;
 
 #[cfg(any(
     feature = "polars_0_40",

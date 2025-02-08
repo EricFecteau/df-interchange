@@ -18,7 +18,7 @@ macro_rules! test_arrow_to_polars {
     };
 }
 
-// ---------- Polars 0_50 ---------- //
+// ---------- Arrow 0_50 ---------- //
 
 #[cfg(all(feature = "arrow_50", feature = "polars_0_40"))]
 test_arrow_to_polars!("50", "0_40");
@@ -41,7 +41,7 @@ test_arrow_to_polars!("50", "0_45");
 #[cfg(all(feature = "arrow_50", feature = "polars_0_46"))]
 test_arrow_to_polars!("50", "0_46");
 
-// ---------- Polars 0_51 ---------- //
+// ---------- Arrow 0_51 ---------- //
 
 #[cfg(all(feature = "arrow_51", feature = "polars_0_40"))]
 test_arrow_to_polars!("51", "0_40");
@@ -64,7 +64,7 @@ test_arrow_to_polars!("51", "0_45");
 #[cfg(all(feature = "arrow_51", feature = "polars_0_46"))]
 test_arrow_to_polars!("51", "0_46");
 
-// ---------- Polars 0_52 ---------- //
+// ---------- Arrow 0_52 ---------- //
 
 #[cfg(all(feature = "arrow_52", feature = "polars_0_40"))]
 test_arrow_to_polars!("52", "0_40");
@@ -87,7 +87,7 @@ test_arrow_to_polars!("52", "0_45");
 #[cfg(all(feature = "arrow_52", feature = "polars_0_46"))]
 test_arrow_to_polars!("52", "0_46");
 
-// ---------- Polars 0_53 ---------- //
+// ---------- Arrow 0_53 ---------- //
 
 #[cfg(all(feature = "arrow_53", feature = "polars_0_40"))]
 test_arrow_to_polars!("53", "0_40");
@@ -110,7 +110,7 @@ test_arrow_to_polars!("53", "0_45");
 #[cfg(all(feature = "arrow_53", feature = "polars_0_46"))]
 test_arrow_to_polars!("53", "0_46");
 
-// ---------- Polars 0_54 ---------- //
+// ---------- Arrow 0_54 ---------- //
 
 #[cfg(all(feature = "arrow_54", feature = "polars_0_40"))]
 test_arrow_to_polars!("54", "0_40");
