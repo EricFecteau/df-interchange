@@ -8,8 +8,13 @@ macro_rules! test_arrow_to_polars {
             #[test]
             pub fn [<test_polars_ $from_ver _to_arrow_ $to_ver>]() -> Result<(), InterchangeError> {
                 let src_df = setup::[<polars_data_ $from_ver>]();
-                let converted_df = Interchange::[<from_polars_ $from_ver>](src_df)?.[<to_arrow_ $to_ver>]()?;
+                let converted_df = Interchange::[<from_polars_ $from_ver>](src_df.clone())?.[<to_arrow_ $to_ver>]()?;
                 let dst_df = setup::[<arrow_data_ $to_ver>]();
+
+                // Print if it fails
+                println!("{:?}", &src_df);
+                println!("{:?}", &converted_df);
+                println!("{:?}", &dst_df);
 
                 assert!(dst_df.eq(&converted_df));
 
