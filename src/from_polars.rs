@@ -1,15 +1,15 @@
 use paste::paste;
 use std::mem::transmute;
 
-use crate::{ArrowArray, ArrowSchema, Interchange};
+use crate::{error::InterchangeError, ArrowArray, ArrowSchema, Interchange};
 
 macro_rules! polars_to_ffi {
     ($from_ver:literal) => {
         paste! {
             impl Interchange {
                 #[doc = "Move Polars version `" $from_ver "` to the Arrow data interchange format."]
-                pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Self {
-                    Self {
+                pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Result<Self, InterchangeError> {
+                    Ok(Self {
                         ffi: {
                             // Number of columns
                             let num_cols = df.width();
@@ -70,7 +70,7 @@ macro_rules! polars_to_ffi {
 
                             ffi
                         }
-                    }
+                    })
                 }
             }
         }
@@ -90,8 +90,8 @@ macro_rules! polars_to_ffi {
         paste! {
             impl Interchange {
                 #[doc = "Move Polars version `" $from_ver "` to the Arrow data interchange format."]
-                pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Self {
-                    Self {
+                pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Result<Self, InterchangeError> {
+                    Ok(Self {
                         ffi: {
                             // Number of columns
                             let num_cols = df.width();
@@ -148,7 +148,7 @@ macro_rules! polars_to_ffi {
 
                             ffi
                         }
-                    }
+                    })
                 }
             }
         }
@@ -166,8 +166,8 @@ macro_rules! polars_to_ffi {
         paste! {
             impl Interchange {
                 #[doc = "Move Polars version `" $from_ver "` to the Arrow data interchange format."]
-                pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Self {
-                    Self {
+                pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Result<Self, InterchangeError> {
+                    Ok(Self {
                         ffi: {
                             // Number of columns
                             let num_cols = df.width();
@@ -179,7 +179,7 @@ macro_rules! polars_to_ffi {
                             let names = df.get_column_names();
 
                             // Get the series from the df
-                            let series: Vec<[<polars_crate_ $from_ver>]::series::Series> = df.select_series(names).unwrap();
+                            let series: Vec<[<polars_crate_ $from_ver>]::series::Series> = df.select_series(names)?;
 
                             for s in series {
                                 // Get arrow-type fields
@@ -227,7 +227,7 @@ macro_rules! polars_to_ffi {
 
                             ffi
                         }
-                    }
+                    })
                 }
             }
         }

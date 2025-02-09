@@ -1,14 +1,14 @@
 use paste::paste;
 use std::mem::transmute;
 
-use crate::{ArrowArray, ArrowSchema, Interchange};
+use crate::{error::InterchangeError, ArrowArray, ArrowSchema, Interchange};
 
 macro_rules! ffi_to_polars {
     ($to_ver:literal) => {
         paste! {
             impl Interchange {
                 #[doc = "Move Arrow data interchange format to Polars version `" $to_ver "`."]
-                pub fn [<to_polars_ $to_ver>](self) -> [<polars_crate_ $to_ver>]::frame::DataFrame {
+                pub fn [<to_polars_ $to_ver>](self) -> Result<[<polars_crate_ $to_ver>]::frame::DataFrame, InterchangeError> {
 
                     // Prepare series vec
                     let num_cols = self.ffi.len();
@@ -36,15 +36,13 @@ macro_rules! ffi_to_polars {
                             // Convert ffi to field
                             let field = unsafe {
                                 [<polars_arrow_ $to_ver>]::ffi::import_field_from_c(&ffi_field)
-                            }
-                            .unwrap();
+                            }?;
 
                             // Convert ffi to chunk
                             let array = unsafe {
                                 [<polars_arrow_ $to_ver>]::ffi::import_array_from_c(ffi_array, field.dtype().clone(),
                                 )
-                            }
-                            .unwrap();
+                            }?;
 
                             // Add the chunks to the vec of chunks
                             chunks.push(array);
@@ -55,13 +53,12 @@ macro_rules! ffi_to_polars {
                             [<polars_crate_ $to_ver>]::series::Series::from_arrow_chunks(
                                 name.into(),
                                 chunks,
-                            )
-                            .unwrap(),
+                            )?,
                         );
                     }
 
                     // Create DataFrame out of Vec of series
-                    [<polars_crate_ $to_ver>]::frame::DataFrame::from_iter(series)
+                    Ok([<polars_crate_ $to_ver>]::frame::DataFrame::from_iter(series))
                 }
             }
         }
@@ -85,7 +82,7 @@ macro_rules! ffi_to_polars {
         paste! {
             impl Interchange {
                 #[doc = "Move Arrow data interchange format to Polars version `" $to_ver "`."]
-                pub fn [<to_polars_ $to_ver>](self) -> [<polars_crate_ $to_ver>]::frame::DataFrame {
+                pub fn [<to_polars_ $to_ver>](self) -> Result<[<polars_crate_ $to_ver>]::frame::DataFrame, InterchangeError> {
 
                     // Prepare series vec
                     let num_cols = self.ffi.len();
@@ -113,15 +110,13 @@ macro_rules! ffi_to_polars {
                             // Convert ffi to field
                             let field = unsafe {
                                 [<polars_arrow_ $to_ver>]::ffi::import_field_from_c(&ffi_field)
-                            }
-                            .unwrap();
+                            }?;
 
                             // Convert ffi to chunk
                             let array = unsafe {
                                 [<polars_arrow_ $to_ver>]::ffi::import_array_from_c(ffi_array, field.data_type().clone(),
                                 )
-                            }
-                            .unwrap();
+                            }?;
 
                             // Add the chunks to the vec of chunks
                             chunks.push(array);
@@ -132,13 +127,12 @@ macro_rules! ffi_to_polars {
                             [<polars_crate_ $to_ver>]::series::Series::from_arrow_chunks(
                                 &name,
                                 chunks,
-                            )
-                            .unwrap(),
+                            )?,
                         );
                     }
 
                     // Create DataFrame out of Vec of series
-                    [<polars_crate_ $to_ver>]::frame::DataFrame::from_iter(series)
+                    Ok([<polars_crate_ $to_ver>]::frame::DataFrame::from_iter(series))
                 }
             }
         }
@@ -156,7 +150,7 @@ macro_rules! ffi_to_polars {
         paste! {
             impl Interchange {
                 #[doc = "Move Arrow data interchange format to Polars version `" $to_ver "`."]
-                pub fn [<to_polars_ $to_ver>](self) -> [<polars_crate_ $to_ver>]::frame::DataFrame {
+                pub fn [<to_polars_ $to_ver>](self) -> Result<[<polars_crate_ $to_ver>]::frame::DataFrame, InterchangeError> {
 
                     // Prepare series vec
                     let num_cols = self.ffi.len();
@@ -184,20 +178,18 @@ macro_rules! ffi_to_polars {
                             // Convert ffi to field
                             let field = unsafe {
                                 [<polars_arrow_ $to_ver>]::ffi::import_field_from_c(&ffi_field)
-                            }
-                            .unwrap();
+                            }?;
 
                             // Convert ffi to chunk
                             let array = unsafe {
                                 [<polars_arrow_ $to_ver>]::ffi::import_array_from_c(ffi_array, field.data_type().clone(),
                                 )
-                            }
-                            .unwrap();
+                            }?;
 
                             let series_chunk = [<polars_crate_ $to_ver>]::series::Series::from_arrow(
                                 &name,
                                 array,
-                            ).unwrap();
+                            )?;
 
                             // Add the chunks to the vec of chunks
                             chunks.push(series_chunk);
@@ -207,7 +199,7 @@ macro_rules! ffi_to_polars {
                         let mut chunk_iter = chunks.into_iter();
                         let mut full_series = chunk_iter.next().unwrap();
                         for c in chunk_iter {
-                            full_series.append(&c).unwrap();
+                            full_series.append(&c)?;
                         }
 
                         series.push(
@@ -216,7 +208,7 @@ macro_rules! ffi_to_polars {
                     }
 
                     // Create DataFrame out of Vec of series
-                    [<polars_crate_ $to_ver>]::frame::DataFrame::from_iter(series)
+                    Ok([<polars_crate_ $to_ver>]::frame::DataFrame::from_iter(series))
                 }
             }
         }

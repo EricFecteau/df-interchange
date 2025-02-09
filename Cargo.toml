@@ -9,6 +9,7 @@ doctest = false
 [dependencies]
 
 paste = "1"
+thiserror = "2"
 
 # Arrow 50
 arrow_crate_50 = { package = "arrow", version = "50", features = ["ffi"], optional = true}

@@ -2,6 +2,9 @@
 #![allow(dead_code)]
 #![allow(unused_macros)]
 
+mod error;
+pub use error::InterchangeError;
+
 #[cfg(any(
     feature = "arrow_50",
     feature = "arrow_51",

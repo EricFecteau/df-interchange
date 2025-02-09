@@ -1,14 +1,14 @@
 use paste::paste;
 use std::mem::transmute;
 
-use crate::{ArrowArray, ArrowSchema, Interchange};
+use crate::{error::InterchangeError, ArrowArray, ArrowSchema, Interchange};
 
 macro_rules! ffi_to_arrow {
     ($to_ver:literal) => {
         paste! {
             impl Interchange {
                 #[doc = "Move Arrow data interchange format to Arrow version `" $to_ver "`."]
-                pub fn [<to_arrow_ $to_ver>](mut self) -> Vec<[<arrow_crate_ $to_ver>]::record_batch::RecordBatch> {
+                pub fn [<to_arrow_ $to_ver>](mut self) -> Result<Vec<[<arrow_crate_ $to_ver>]::record_batch::RecordBatch>, InterchangeError> {
 
                     // Get number of columns
                     let num_cols = self.ffi.len();
@@ -38,13 +38,13 @@ macro_rules! ffi_to_arrow {
                             let ffi_schema = unsafe { transmute::<ArrowSchema,  [<arrow_crate_ $to_ver>]::ffi::FFI_ArrowSchema>(chunk.1) };
 
                             // Import into arrow-rs
-                            let from_ffi = unsafe { [<arrow_crate_ $to_ver>]::ffi::from_ffi(ffi_array, &ffi_schema) }.unwrap();
+                            let from_ffi = unsafe { [<arrow_crate_ $to_ver>]::ffi::from_ffi(ffi_array, &ffi_schema) }?;
 
                             // Make an array out of it
                             let array_ref = [<arrow_crate_ $to_ver>]::array::make_array(from_ffi);
 
                             // Get the field for the batch schema
-                            let field = std::convert::TryInto::<[<arrow_crate_ $to_ver>]::datatypes::Field>::try_into(&ffi_schema).unwrap();
+                            let field = std::convert::TryInto::<[<arrow_crate_ $to_ver>]::datatypes::Field>::try_into(&ffi_schema)?;
 
                             arrays.push(array_ref);
                             fields.push(std::sync::Arc::new(field));
@@ -52,13 +52,13 @@ macro_rules! ffi_to_arrow {
 
                         // Create batch record from array and schema
                         let schema = [<arrow_crate_ $to_ver>]::datatypes::Schema::new(fields);
-                        let record_batch = [<arrow_crate_ $to_ver>]::record_batch::RecordBatch::try_new(std::sync::Arc::new(schema), arrays).unwrap();
+                        let record_batch = [<arrow_crate_ $to_ver>]::record_batch::RecordBatch::try_new(std::sync::Arc::new(schema), arrays)?;
 
                         batches.push(record_batch)
 
                     }
 
-                    batches
+                    Ok(batches)
                 }
             }
         }

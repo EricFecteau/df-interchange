@@ -1,15 +1,15 @@
 use paste::paste;
 use std::mem::transmute;
 
-use crate::{ArrowArray, ArrowSchema, Interchange};
+use crate::{error::InterchangeError, ArrowArray, ArrowSchema, Interchange};
 
 macro_rules! arrow_to_ffi {
     ($from_ver:literal) => {
         paste! {
             impl Interchange {
                 #[doc = "Move Arrow version `" $from_ver "` to the Arrow data interchange format."]
-                pub fn [<from_arrow_ $from_ver>](df: Vec<[<arrow_crate_ $from_ver>]::record_batch::RecordBatch>) -> Self {
-                    Self {
+                pub fn [<from_arrow_ $from_ver>](df: Vec<[<arrow_crate_ $from_ver>]::record_batch::RecordBatch>) -> Result<Self, InterchangeError> {
+                    Ok(Self {
                         ffi: {
                             // Number of chunks
                             let num_chunks = df.len();
@@ -32,8 +32,8 @@ macro_rules! arrow_to_ffi {
                                     let array = col.to_data();
 
                                     // Convert to ffi
-                                    let ffi_schema = [<arrow_crate_ $from_ver>]::ffi::FFI_ArrowSchema::try_from(chunk.schema().field(col_num)).unwrap();
-                                    let (ffi_array, _) = [<arrow_crate_ $from_ver>]::ffi::to_ffi(&array).unwrap();
+                                    let ffi_schema = [<arrow_crate_ $from_ver>]::ffi::FFI_ArrowSchema::try_from(chunk.schema().field(col_num))?;
+                                    let (ffi_array, _) = [<arrow_crate_ $from_ver>]::ffi::to_ffi(&array)?;
 
                                     // Convert ffi array from arrow-rs to this crate's version of ArrowArray
                                     let ffi_array = unsafe { transmute::<[<arrow_crate_ $from_ver>]::ffi::FFI_ArrowArray, ArrowArray>(ffi_array) };
@@ -47,7 +47,7 @@ macro_rules! arrow_to_ffi {
 
                             ffi
                         }
-                    }
+                    })
                 }
             }
         }

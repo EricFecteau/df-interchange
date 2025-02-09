@@ -1,17 +1,19 @@
 mod setup;
-use df_interchange::Interchange;
+use df_interchange::{Interchange, InterchangeError};
 use paste::paste;
 
 macro_rules! test_polars_to_polars {
     ($from_ver:literal, $to_ver:literal) => {
         paste! {
             #[test]
-            pub fn [<test_polars_ $from_ver _to_polars_ $to_ver>]() {
+            pub fn [<test_polars_ $from_ver _to_polars_ $to_ver>]() -> Result<(), InterchangeError> {
                 let src_df = setup::[<polars_data_ $from_ver>]();
-                let converted_df = Interchange::[<from_polars_ $from_ver>](src_df).[<to_polars_ $to_ver>]();
+                let converted_df = Interchange::[<from_polars_ $from_ver>](src_df)?.[<to_polars_ $to_ver>]()?;
                 let dst_df = setup::[<polars_data_ $to_ver>]();
 
                 assert!(dst_df.equals_missing(&converted_df));
+
+                Ok(())
             }
 
         }
