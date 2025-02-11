@@ -6,3 +6,5 @@ test-quick:
 test-all:
     cargo test --features all -j1
     
+doc:
+    cargo doc --lib --open --features all
