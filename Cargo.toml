@@ -7,6 +7,9 @@ description = "Seamless interoperability between Polars and Arrow."
 repository = "https://github.com/EricFecteau/df-interchange"
 readme = "README.md"
 
+[package.metadata.docs.rs]
+all-features = true
+
 [lib]
 doctest = false
 
