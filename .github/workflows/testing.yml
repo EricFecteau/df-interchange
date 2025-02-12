@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install CI tools
+        run: |
+          apt-get update
+          apt-get install -y curl
+
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
