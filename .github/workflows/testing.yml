@@ -1,0 +1,51 @@
+name: testing
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    container: ubuntu:24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CI tools
+        run: |
+          apt-get update
+          apt-get install -y curl build-essential
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+          default: true
+
+      - uses: extractions/setup-just@v2
+
+      - name: Verify code formatting
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: --all -- --check -q
+
+      - name: Clippy linting
+        uses: actions-rs/cargo@v1
+        with:
+          command: clippy
+          args: --features all
+
+      - name: Run tests
+        run: cargo clean && just test-all
+
+      - name: Test build docs
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --no-deps --features all
