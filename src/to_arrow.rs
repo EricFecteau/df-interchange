@@ -62,6 +62,9 @@ macro_rules! ffi_to_arrow {
 
                     }
 
+                    // Reverse the batches
+                    let batches = batches.into_iter().rev().collect();
+
                     Ok(batches)
                 }
             }
