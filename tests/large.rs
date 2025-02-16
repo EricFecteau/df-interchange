@@ -16,20 +16,23 @@ use df_interchange::{Interchange, InterchangeError};
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
-    use polars_crate_0_46::prelude::{col, lit, IntoLazy};
+    use polars_crate_0_46::prelude::{col, lit, IntoLazy, Series};
 
     let lf = load_data();
 
-    // let lf = lf.with_column((col("SEX") * lit(2)).alias("test2"));
+    let rows: Vec<u64> = (0..2_000_001).step_by(100_000).collect();
+    let pre_rows = lf
+        .clone()
+        .with_row_index("index", None)
+        .filter(col("index").is_in(lit(Series::from_iter(rows.clone()))))
+        .collect()
+        .unwrap();
 
-    // let verify_order = lf
-    //     .clone()
-    //     .with_column(col("index").shift(lit(1)).alias("index_shift"))
-    //     .select([col("index"), col("index_shift")])
-    //     .filter((col("index") - col("index_shift")).eq_missing(lit(1)).not())
-    //     .filter(col("index").eq(lit(0)).not());
-
-    // assert!(0 == verify_order.collect().unwrap().shape().0);
+    let pre_weight = lf
+        .clone()
+        .select([col("FINALWT").sum().alias("weight_sum")])
+        .collect()
+        .unwrap();
 
     let df = lf.collect().unwrap();
 
@@ -38,6 +41,7 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let arrow_52 = Interchange::from_arrow_51(arrow_51)?.to_arrow_52()?;
     let arrow_53 = Interchange::from_arrow_52(arrow_52)?.to_arrow_53()?;
     let arrow_54 = Interchange::from_arrow_53(arrow_53)?.to_arrow_54()?;
+
     let polars_0_40 = Interchange::from_arrow_54(arrow_54)?.to_polars_0_40()?;
     let polars_0_41 = Interchange::from_polars_0_40(polars_0_40)?.to_polars_0_41()?;
     let polars_0_42 = Interchange::from_polars_0_41(polars_0_41)?.to_polars_0_42()?;
@@ -46,24 +50,33 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let polars_0_45 = Interchange::from_polars_0_44(polars_0_44)?.to_polars_0_45()?;
     let polars_0_46 = Interchange::from_polars_0_45(polars_0_45)?.to_polars_0_46()?;
 
-    // let verify_order = polars_0_46
-    //     .lazy()
-    //     .with_column(col("index").shift(lit(1)).alias("index_shift"))
-    //     .select([col("index"), col("index_shift")])
-    //     .filter((col("index") - col("index_shift")).eq_missing(lit(1)).not())
-    //     .filter(col("index").eq(lit(0)).not());
+    let lf = polars_0_46.lazy();
 
-    // assert!(0 == verify_order.collect().unwrap().shape().0);
+    let post_rows = lf
+        .clone()
+        .with_row_index("index", None)
+        .filter(col("index").is_in(lit(Series::from_iter(rows))))
+        .collect()
+        .unwrap();
 
-    // let converted_df = Interchange::[<from_arrow_ $from_ver>](src_df.clone())?.[<to_polars_ $to_ver>]()?;
-    // let dst_df = setup::[<polars_data_ $to_ver>]();
+    // Print if it fails
+    println!("{}", &pre_rows);
+    println!("{}", &post_rows);
 
-    // // Print if it fails
-    // println!("{:?}", &src_df);
-    // println!("{:?}", &converted_df);
-    // println!("{:?}", &dst_df);
+    assert!(pre_rows.equals_missing(&post_rows));
 
-    // assert!(dst_df.equals_missing(&converted_df));
+    let post_weight = lf
+        .lazy()
+        .clone()
+        .select([col("FINALWT").sum().alias("weight_sum")])
+        .collect()
+        .unwrap();
+
+    // Print if it fails
+    println!("{}", &pre_weight);
+    println!("{}", &post_weight);
+
+    assert!(pre_weight.equals_missing(&post_weight));
 
     Ok(())
 }
@@ -99,5 +112,4 @@ fn load_data() -> polars_crate_0_46::prelude::LazyFrame {
 
     polars_crate_0_46::prelude::concat(lf_vec, polars_crate_0_46::prelude::UnionArgs::default())
         .unwrap()
-    // .with_row_index("index", None)
 }
