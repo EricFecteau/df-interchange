@@ -1,6 +1,6 @@
 [package]
 name = "df-interchange"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "GPL-3.0"
 description = "Seamless interoperability between Polars and Arrow."
@@ -79,3 +79,4 @@ arrow_53 = ["arrow_crate_53"]
 arrow_54 = ["arrow_crate_54"]
 
 [dev-dependencies]
+polars_crate_0_46 = { package = "polars", version = "0.46", features = ["lazy", "csv", "is_in"] }

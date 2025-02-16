@@ -10,6 +10,10 @@ macro_rules! ffi_to_arrow {
                 #[doc = "Move Arrow data interchange format to Arrow version `" $to_ver "`."]
                 pub fn [<to_arrow_ $to_ver>](mut self) -> Result<Vec<[<arrow_crate_ $to_ver>]::record_batch::RecordBatch>, InterchangeError> {
 
+                    if !self.chunks_aligned {
+                        return Err(InterchangeError::ChunksNotAligned);
+                    }
+
                     // Get number of columns
                     let num_cols = self.ffi.len();
 
@@ -57,6 +61,9 @@ macro_rules! ffi_to_arrow {
                         batches.push(record_batch)
 
                     }
+
+                    // Reverse the batches
+                    let batches = batches.into_iter().rev().collect();
 
                     Ok(batches)
                 }

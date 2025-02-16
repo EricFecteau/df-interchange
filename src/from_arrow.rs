@@ -10,6 +10,7 @@ macro_rules! arrow_to_ffi {
                 #[doc = "Move Arrow version `" $from_ver "` to the Arrow data interchange format."]
                 pub fn [<from_arrow_ $from_ver>](df: Vec<[<arrow_crate_ $from_ver>]::record_batch::RecordBatch>) -> Result<Self, InterchangeError> {
                     Ok(Self {
+                        chunks_aligned: true,
                         ffi: {
                             // Number of chunks
                             let num_chunks = df.len();

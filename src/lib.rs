@@ -186,5 +186,6 @@ struct ArrowSchema {
 }
 
 pub struct Interchange {
+    chunks_aligned: bool,
     ffi: Vec<(String, Vec<(ArrowArray, ArrowSchema)>)>,
 }

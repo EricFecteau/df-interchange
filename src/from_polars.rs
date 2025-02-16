@@ -10,6 +10,7 @@ macro_rules! polars_to_ffi {
                 #[doc = "Move Polars version `" $from_ver "` to the Arrow data interchange format."]
                 pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Result<Self, InterchangeError> {
                     Ok(Self {
+                        chunks_aligned: !df.should_rechunk(),
                         ffi: {
                             // Number of columns
                             let num_cols = df.width();
@@ -92,6 +93,7 @@ macro_rules! polars_to_ffi {
                 #[doc = "Move Polars version `" $from_ver "` to the Arrow data interchange format."]
                 pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Result<Self, InterchangeError> {
                     Ok(Self {
+                        chunks_aligned: !df.should_rechunk(),
                         ffi: {
                             // Number of columns
                             let num_cols = df.width();
@@ -168,6 +170,7 @@ macro_rules! polars_to_ffi {
                 #[doc = "Move Polars version `" $from_ver "` to the Arrow data interchange format."]
                 pub fn [<from_polars_ $from_ver>](df: [<polars_crate_ $from_ver>]::frame::DataFrame) -> Result<Self, InterchangeError> {
                     Ok(Self {
+                        chunks_aligned: !df.should_rechunk(),
                         ffi: {
                             // Number of columns
                             let num_cols = df.width();
