@@ -2,7 +2,7 @@
 name = "df-interchange"
 version = "0.1.2"
 edition = "2021"
-license = "GPL-3.0"
+license = "MPL-2.0"
 description = "Seamless interoperability between Polars and Arrow."
 repository = "https://github.com/EricFecteau/df-interchange"
 readme = "README.md"
