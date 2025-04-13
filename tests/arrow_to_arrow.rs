@@ -39,6 +39,9 @@ test_arrow_to_arrow!("50", "53");
 #[cfg(all(feature = "arrow_50", feature = "arrow_54"))]
 test_arrow_to_arrow!("50", "54");
 
+#[cfg(all(feature = "arrow_50", feature = "arrow_55"))]
+test_arrow_to_arrow!("50", "55");
+
 // ---------- Arrow 51 ---------- //
 
 #[cfg(all(feature = "arrow_51", feature = "arrow_50"))]
@@ -52,6 +55,9 @@ test_arrow_to_arrow!("51", "53");
 
 #[cfg(all(feature = "arrow_51", feature = "arrow_54"))]
 test_arrow_to_arrow!("51", "54");
+
+#[cfg(all(feature = "arrow_51", feature = "arrow_55"))]
+test_arrow_to_arrow!("51", "55");
 
 // ---------- Arrow 52 ---------- //
 
@@ -67,6 +73,9 @@ test_arrow_to_arrow!("52", "53");
 #[cfg(all(feature = "arrow_52", feature = "arrow_54"))]
 test_arrow_to_arrow!("52", "54");
 
+#[cfg(all(feature = "arrow_52", feature = "arrow_55"))]
+test_arrow_to_arrow!("52", "55");
+
 // ---------- Arrow 53 ---------- //
 
 #[cfg(all(feature = "arrow_53", feature = "arrow_50"))]
@@ -81,6 +90,9 @@ test_arrow_to_arrow!("53", "52");
 #[cfg(all(feature = "arrow_53", feature = "arrow_54"))]
 test_arrow_to_arrow!("53", "54");
 
+#[cfg(all(feature = "arrow_53", feature = "arrow_55"))]
+test_arrow_to_arrow!("53", "55");
+
 // ---------- Arrow 54 ---------- //
 
 #[cfg(all(feature = "arrow_54", feature = "arrow_50"))]
@@ -94,3 +106,23 @@ test_arrow_to_arrow!("54", "52");
 
 #[cfg(all(feature = "arrow_54", feature = "arrow_53"))]
 test_arrow_to_arrow!("54", "53");
+
+#[cfg(all(feature = "arrow_54", feature = "arrow_55"))]
+test_arrow_to_arrow!("54", "55");
+
+// ---------- Arrow 55 ---------- //
+
+#[cfg(all(feature = "arrow_55", feature = "arrow_50"))]
+test_arrow_to_arrow!("55", "50");
+
+#[cfg(all(feature = "arrow_55", feature = "arrow_51"))]
+test_arrow_to_arrow!("55", "51");
+
+#[cfg(all(feature = "arrow_55", feature = "arrow_52"))]
+test_arrow_to_arrow!("55", "52");
+
+#[cfg(all(feature = "arrow_55", feature = "arrow_53"))]
+test_arrow_to_arrow!("55", "53");
+
+#[cfg(all(feature = "arrow_55", feature = "arrow_55"))]
+test_arrow_to_arrow!("55", "55");
