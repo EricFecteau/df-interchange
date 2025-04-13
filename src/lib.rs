@@ -123,7 +123,8 @@ pub use error::InterchangeError;
     feature = "arrow_51",
     feature = "arrow_52",
     feature = "arrow_53",
-    feature = "arrow_54"
+    feature = "arrow_54",
+    feature = "arrow_55"
 ))]
 mod from_arrow;
 
@@ -143,7 +144,8 @@ mod from_polars;
     feature = "arrow_51",
     feature = "arrow_52",
     feature = "arrow_53",
-    feature = "arrow_54"
+    feature = "arrow_54",
+    feature = "arrow_55"
 ))]
 mod to_arrow;
 
