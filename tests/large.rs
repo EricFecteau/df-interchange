@@ -79,7 +79,7 @@ fn load_data() -> polars_crate_0_46::prelude::LazyFrame {
     use polars_crate_0_46::prelude::LazyFileListReader;
 
     // Get schema
-    let schema = polars_crate_0_46::prelude::LazyCsvReader::new("./data/csv/pub0106.csv")
+    let schema = polars_crate_0_46::prelude::LazyCsvReader::new("./data/csv/pub0120.csv")
         .with_has_header(true)
         .with_infer_schema_length(None)
         .finish()
