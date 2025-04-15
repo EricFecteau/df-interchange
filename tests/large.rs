@@ -8,11 +8,8 @@ use df_interchange::{Interchange, InterchangeError};
     feature = "polars_0_44",
     feature = "polars_0_45",
     feature = "polars_0_46",
-    feature = "arrow_50",
-    feature = "arrow_51",
-    feature = "arrow_52",
-    feature = "arrow_53",
     feature = "arrow_54",
+    feature = "arrow_55",
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
@@ -36,13 +33,10 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 
     let df = lf.collect().unwrap();
 
-    let arrow_50 = Interchange::from_polars_0_46(df)?.to_arrow_50()?;
-    let arrow_51 = Interchange::from_arrow_50(arrow_50)?.to_arrow_51()?;
-    let arrow_52 = Interchange::from_arrow_51(arrow_51)?.to_arrow_52()?;
-    let arrow_53 = Interchange::from_arrow_52(arrow_52)?.to_arrow_53()?;
-    let arrow_54 = Interchange::from_arrow_53(arrow_53)?.to_arrow_54()?;
+    let arrow_54 = Interchange::from_polars_0_46(df)?.to_arrow_54()?;
+    let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
 
-    let polars_0_40 = Interchange::from_arrow_54(arrow_54)?.to_polars_0_40()?;
+    let polars_0_40 = Interchange::from_arrow_55(arrow_55)?.to_polars_0_40()?;
     let polars_0_41 = Interchange::from_polars_0_40(polars_0_40)?.to_polars_0_41()?;
     let polars_0_42 = Interchange::from_polars_0_41(polars_0_41)?.to_polars_0_42()?;
     let polars_0_43 = Interchange::from_polars_0_42(polars_0_42)?.to_polars_0_43()?;

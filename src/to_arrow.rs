@@ -72,18 +72,6 @@ macro_rules! ffi_to_arrow {
     };
 }
 
-#[cfg(feature = "arrow_50")]
-ffi_to_arrow!("50");
-
-#[cfg(feature = "arrow_51")]
-ffi_to_arrow!("51");
-
-#[cfg(feature = "arrow_52")]
-ffi_to_arrow!("52");
-
-#[cfg(feature = "arrow_53")]
-ffi_to_arrow!("53");
-
 #[cfg(feature = "arrow_54")]
 ffi_to_arrow!("54");
 

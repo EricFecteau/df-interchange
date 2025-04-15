@@ -18,18 +18,6 @@ doctest = false
 paste = "1"
 thiserror = "2"
 
-# Arrow 50
-arrow_crate_50 = { package = "arrow", version = "50", features = ["ffi"], optional = true}
-
-# Arrow 51
-arrow_crate_51 = { package = "arrow", version = "51", features = ["ffi"], optional = true}
-
-# Arrow 52
-arrow_crate_52 = { package = "arrow", version = "52", features = ["ffi"], optional = true}
-
-# Arrow 53
-arrow_crate_53 = { package = "arrow", version = "53", features = ["ffi"], optional = true}
-
 # Arrow 54
 arrow_crate_54 = { package = "arrow", version = "54", features = ["ffi"], optional = true}
 
@@ -67,7 +55,7 @@ polars_arrow_0_46 = { package = "polars-arrow", version = "0.46", optional = tru
 [features]
 all = ["all_polars", "all_arrow"]
 all_polars = ["polars_0_40", "polars_0_41", "polars_0_42", "polars_0_43", "polars_0_44", "polars_0_45", "polars_0_46"]
-all_arrow = ["arrow_50", "arrow_51", "arrow_52", "arrow_53", "arrow_54", "arrow_55"]
+all_arrow = ["arrow_54", "arrow_55"]
 polars_0_40 = ["polars_crate_0_40", "polars_arrow_0_40"]
 polars_0_41 = ["polars_crate_0_41", "polars_arrow_0_41"]
 polars_0_42 = ["polars_crate_0_42", "polars_arrow_0_42"]
@@ -75,10 +63,6 @@ polars_0_43 = ["polars_crate_0_43", "polars_arrow_0_43"]
 polars_0_44 = ["polars_crate_0_44", "polars_arrow_0_44"]
 polars_0_45 = ["polars_crate_0_45", "polars_arrow_0_45"]
 polars_0_46 = ["polars_crate_0_46", "polars_arrow_0_46"]
-arrow_50 = ["arrow_crate_50"]
-arrow_51 = ["arrow_crate_51"]
-arrow_52 = ["arrow_crate_52"]
-arrow_53 = ["arrow_crate_53"]
 arrow_54 = ["arrow_crate_54"]
 arrow_55 = ["arrow_crate_55"]
 

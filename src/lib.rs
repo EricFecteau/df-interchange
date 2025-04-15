@@ -118,14 +118,7 @@
 mod error;
 pub use error::InterchangeError;
 
-#[cfg(any(
-    feature = "arrow_50",
-    feature = "arrow_51",
-    feature = "arrow_52",
-    feature = "arrow_53",
-    feature = "arrow_54",
-    feature = "arrow_55"
-))]
+#[cfg(any(feature = "arrow_54", feature = "arrow_55"))]
 mod from_arrow;
 
 #[cfg(any(
@@ -139,14 +132,7 @@ mod from_arrow;
 ))]
 mod from_polars;
 
-#[cfg(any(
-    feature = "arrow_50",
-    feature = "arrow_51",
-    feature = "arrow_52",
-    feature = "arrow_53",
-    feature = "arrow_54",
-    feature = "arrow_55"
-))]
+#[cfg(any(feature = "arrow_54", feature = "arrow_55"))]
 mod to_arrow;
 
 #[cfg(any(
