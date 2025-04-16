@@ -145,17 +145,8 @@ macro_rules! create_arrow_data {
     };
 }
 
-#[cfg(feature = "arrow_50")]
-create_arrow_data!("50");
-
-#[cfg(feature = "arrow_51")]
-create_arrow_data!("51");
-
-#[cfg(feature = "arrow_52")]
-create_arrow_data!("52");
-
-#[cfg(feature = "arrow_53")]
-create_arrow_data!("53");
-
 #[cfg(feature = "arrow_54")]
 create_arrow_data!("54");
+
+#[cfg(feature = "arrow_55")]
+create_arrow_data!("55");

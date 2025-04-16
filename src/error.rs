@@ -34,25 +34,13 @@ pub enum InterchangeError {
     #[error(transparent)]
     Polars0_46Error(#[from] polars_crate_0_46::error::PolarsError),
 
-    #[cfg(feature = "arrow_50")]
-    #[error(transparent)]
-    Arrow50Error(#[from] arrow_crate_50::error::ArrowError),
-
-    #[cfg(feature = "arrow_51")]
-    #[error(transparent)]
-    Arrow51Error(#[from] arrow_crate_51::error::ArrowError),
-
-    #[cfg(feature = "arrow_52")]
-    #[error(transparent)]
-    Arrow52Error(#[from] arrow_crate_52::error::ArrowError),
-
-    #[cfg(feature = "arrow_53")]
-    #[error(transparent)]
-    Arrow53Error(#[from] arrow_crate_53::error::ArrowError),
-
     #[cfg(feature = "arrow_54")]
     #[error(transparent)]
     Arrow54Error(#[from] arrow_crate_54::error::ArrowError),
+
+    #[cfg(feature = "arrow_55")]
+    #[error(transparent)]
+    Arrow55Error(#[from] arrow_crate_55::error::ArrowError),
 
     #[error("Chunks must be aligned when moving data from Polars to Arrow.")]
     ChunksNotAligned,

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-start_year=2006
+start_year=2015
 end_year=2023
 
 rm -r ./data/csv
