@@ -123,6 +123,9 @@ create_polars_data!("0_45");
 #[cfg(feature = "polars_0_46")]
 create_polars_data!("0_46");
 
+#[cfg(feature = "polars_0_47")]
+create_polars_data!("0_47");
+
 macro_rules! create_arrow_data {
     ($version:literal) => {
         paste! {
