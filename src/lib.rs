@@ -26,7 +26,7 @@
 //! [dependencies]
 //! polars = "0.43"
 //! arrow = "54"
-//! df-interchange = { version = "0.1.0", features = ["polars_0_43", "polars_0_46", "arrow_54"] }
+//! df-interchange = { version = "0.2", features = ["polars_0_43", "polars_0_46", "arrow_54"] }
 //! ```
 //! Then use the `from_polars_0_43` & `from_arrow_54` and `to_polars_0_46` implementation of `Interchange` to change types:
 //!
