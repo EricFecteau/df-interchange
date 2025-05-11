@@ -1,12 +1,12 @@
 # DataFrame Interchange
 
-![crates.io](https://img.shields.io/crates/v/df-interchange) ![docs.rs](https://img.shields.io/docsrs/df-interchange)
+[![crates.io](https://img.shields.io/crates/v/df-interchange)](https://crates.io/crates/df-interchange) [![docs.rs](https://img.shields.io/docsrs/df-interchange)](https://docs.rs/df-interchange/latest/df_interchange/index.html)
 
 This crate allows for seamless interoperability between any version of [Polars (>=0.40)](https://docs.rs/polars/latest/polars/) and any version of [Arrow (>=54)](https://docs.rs/arrow/latest/arrow/), including between versions of the same crate (e.g. `Polars 0.40` to `Polars 0.46`), using the [Arrow C Data Interchange](https://arrow.apache.org/docs/format/CDataInterface.html) format.
 
 Supported versions:
 * Arrow: "54", "55"
-* Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46"  
+* Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47"
 
 ## Polars and Arrow Rust ecosystem
 
@@ -24,7 +24,7 @@ Enable the correct feature (e.g. `Polars 0.43`, `Polars 0.46` and `Arrow 54`):
 [dependencies]
 polars = "0.43"
 arrow = "54"
-df-interchange = { version = "0.1.0", features = ["polars_0_43", "polars_0_46", "arrow_54"] }
+df-interchange = { version = "0.2", features = ["polars_0_43", "polars_0_46", "arrow_54"] }
 ```
 
 Then use the `from_polars_0_43` & `from_arrow_54` and `to_polars_0_46` implementation of `Interchange` to change types:

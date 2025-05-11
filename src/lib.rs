@@ -8,7 +8,7 @@
 //!
 //! Supported versions:
 //! * Arrow: "54", "55"
-//! * Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46"
+//! * Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47"
 //!
 //! ## Polars and Arrow Rust ecosystem
 //!
@@ -26,7 +26,7 @@
 //! [dependencies]
 //! polars = "0.43"
 //! arrow = "54"
-//! df-interchange = { version = "0.1.0", features = ["polars_0_43", "polars_0_46", "arrow_54"] }
+//! df-interchange = { version = "0.2", features = ["polars_0_43", "polars_0_46", "arrow_54"] }
 //! ```
 //! Then use the `from_polars_0_43` & `from_arrow_54` and `to_polars_0_46` implementation of `Interchange` to change types:
 //!
@@ -128,7 +128,8 @@ mod from_arrow;
     feature = "polars_0_43",
     feature = "polars_0_44",
     feature = "polars_0_45",
-    feature = "polars_0_46"
+    feature = "polars_0_46",
+    feature = "polars_0_47"
 ))]
 mod from_polars;
 
@@ -142,7 +143,8 @@ mod to_arrow;
     feature = "polars_0_43",
     feature = "polars_0_44",
     feature = "polars_0_45",
-    feature = "polars_0_46"
+    feature = "polars_0_46",
+    feature = "polars_0_47"
 ))]
 mod to_polars;
 
