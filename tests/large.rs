@@ -1,4 +1,5 @@
 use df_interchange::{Interchange, InterchangeError};
+use std::time::SystemTime;
 
 #[cfg(all(
     feature = "polars_0_40",
@@ -16,6 +17,8 @@ use df_interchange::{Interchange, InterchangeError};
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
     use polars_crate_0_48::prelude::{col, lit, IntoLazy, Series};
+
+    let timer = SystemTime::now();
 
     let lf = load_data();
 
@@ -35,6 +38,10 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 
     let df = lf.collect().unwrap();
 
+    println!("Collecting data: {:?}", timer.elapsed().unwrap().as_secs());
+
+    let timer = SystemTime::now();
+
     let arrow_54 = Interchange::from_polars_0_48(df)?.to_arrow_54()?;
     let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
 
@@ -47,6 +54,11 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let polars_0_46 = Interchange::from_polars_0_45(polars_0_45)?.to_polars_0_46()?;
     let polars_0_47 = Interchange::from_polars_0_46(polars_0_46)?.to_polars_0_47()?;
     let polars_0_48 = Interchange::from_polars_0_47(polars_0_47)?.to_polars_0_48()?;
+
+    println!(
+        "Moving data between versions: {:?}",
+        timer.elapsed().unwrap().as_secs()
+    );
 
     let lf = polars_0_48.lazy();
 
