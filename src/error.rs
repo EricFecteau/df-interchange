@@ -38,6 +38,10 @@ pub enum InterchangeError {
     #[error(transparent)]
     Polars0_47Error(#[from] polars_crate_0_47::error::PolarsError),
 
+    #[cfg(feature = "polars_0_48")]
+    #[error(transparent)]
+    Polars0_48Error(#[from] polars_crate_0_48::error::PolarsError),
+
     #[cfg(feature = "arrow_54")]
     #[error(transparent)]
     Arrow54Error(#[from] arrow_crate_54::error::ArrowError),

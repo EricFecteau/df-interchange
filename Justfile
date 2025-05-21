@@ -1,6 +1,6 @@
 test-quick:
-    cargo test --features "polars_0_45 polars_0_47" --test polars_to_polars
-    cargo test --features "polars_0_47 arrow_54" --test polars_to_arrow --test arrow_to_polars
+    cargo test --features "polars_0_45 polars_0_48" --test polars_to_polars
+    cargo test --features "polars_0_48 arrow_54" --test polars_to_arrow --test arrow_to_polars
     cargo test --features "arrow_54 arrow_55" --test arrow_to_arrow
 
 test-large:
