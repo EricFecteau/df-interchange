@@ -77,4 +77,4 @@ arrow_54 = ["arrow_crate_54"]
 arrow_55 = ["arrow_crate_55"]
 
 [dev-dependencies]
-polars_crate_0_48 = { package = "polars", version = "0.48", features = ["lazy", "csv", "is_in", "dtype-categorical", "strings"] }
+polars_crate_0_48 = { package = "polars", version = "0.48", features = ["lazy", "csv", "is_in"] }
