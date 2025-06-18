@@ -11,12 +11,13 @@ use std::time::SystemTime;
     feature = "polars_0_46",
     feature = "polars_0_47",
     feature = "polars_0_48",
+    feature = "polars_0_49",
     feature = "arrow_54",
     feature = "arrow_55",
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
-    use polars_crate_0_48::prelude::{col, lit, IntoLazy, Series};
+    use polars_crate_0_49::prelude::{col, lit, IntoLazy, Series};
 
     let timer = SystemTime::now();
 
@@ -42,7 +43,7 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 
     let timer = SystemTime::now();
 
-    let arrow_54 = Interchange::from_polars_0_48(df)?.to_arrow_54()?;
+    let arrow_54 = Interchange::from_polars_0_49(df)?.to_arrow_54()?;
     let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
 
     let polars_0_40 = Interchange::from_arrow_55(arrow_55)?.to_polars_0_40()?;
@@ -54,13 +55,14 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let polars_0_46 = Interchange::from_polars_0_45(polars_0_45)?.to_polars_0_46()?;
     let polars_0_47 = Interchange::from_polars_0_46(polars_0_46)?.to_polars_0_47()?;
     let polars_0_48 = Interchange::from_polars_0_47(polars_0_47)?.to_polars_0_48()?;
+    let polars_0_49 = Interchange::from_polars_0_48(polars_0_48)?.to_polars_0_49()?;
 
     println!(
         "Moving data between versions: {:?}",
         timer.elapsed().unwrap().as_secs()
     );
 
-    let lf = polars_0_48.lazy();
+    let lf = polars_0_49.lazy();
 
     let post_rows = lf
         .clone()
@@ -91,11 +93,11 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     Ok(())
 }
 
-fn load_data() -> polars_crate_0_48::prelude::LazyFrame {
-    use polars_crate_0_48::prelude::LazyFileListReader;
+fn load_data() -> polars_crate_0_49::prelude::LazyFrame {
+    use polars_crate_0_49::prelude::LazyFileListReader;
 
     // Get schema
-    let schema = polars_crate_0_48::prelude::LazyCsvReader::new("./data/csv/pub0120.csv")
+    let schema = polars_crate_0_49::prelude::LazyCsvReader::new("./data/csv/pub0120.csv")
         .with_has_header(true)
         .with_infer_schema_length(None)
         .finish()
@@ -111,7 +113,7 @@ fn load_data() -> polars_crate_0_48::prelude::LazyFrame {
     for path in paths {
         let csv = path.unwrap().path();
 
-        let lf = polars_crate_0_48::prelude::LazyCsvReader::new(csv)
+        let lf = polars_crate_0_49::prelude::LazyCsvReader::new(csv)
             .with_has_header(true)
             .with_schema(Some(schema.clone()))
             .finish()
@@ -120,6 +122,6 @@ fn load_data() -> polars_crate_0_48::prelude::LazyFrame {
         lf_vec.push(lf);
     }
 
-    polars_crate_0_48::prelude::concat(lf_vec, polars_crate_0_48::prelude::UnionArgs::default())
+    polars_crate_0_49::prelude::concat(lf_vec, polars_crate_0_49::prelude::UnionArgs::default())
         .unwrap()
 }
