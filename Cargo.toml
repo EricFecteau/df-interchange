@@ -1,6 +1,6 @@
 [package]
 name = "df-interchange"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2021"
 license = "MPL-2.0"
 description = "Seamless interoperability between Polars and Arrow."
@@ -60,9 +60,13 @@ polars_arrow_0_47 = { package = "polars-arrow", version = "0.47", optional = tru
 polars_crate_0_48 = { package = "polars", version = "0.48", optional = true}
 polars_arrow_0_48 = { package = "polars-arrow", version = "0.48", optional = true}
 
+# Polars 0.49
+polars_crate_0_49 = { package = "polars", version = "0.49", optional = true}
+polars_arrow_0_49 = { package = "polars-arrow", version = "0.49", optional = true}
+
 [features]
 all = ["all_polars", "all_arrow"]
-all_polars = ["polars_0_40", "polars_0_41", "polars_0_42", "polars_0_43", "polars_0_44", "polars_0_45", "polars_0_46", "polars_0_47", "polars_0_48"]
+all_polars = ["polars_0_40", "polars_0_41", "polars_0_42", "polars_0_43", "polars_0_44", "polars_0_45", "polars_0_46", "polars_0_47", "polars_0_48", "polars_0_49"]
 all_arrow = ["arrow_54", "arrow_55"]
 polars_0_40 = ["polars_crate_0_40", "polars_arrow_0_40"]
 polars_0_41 = ["polars_crate_0_41", "polars_arrow_0_41"]
@@ -73,8 +77,9 @@ polars_0_45 = ["polars_crate_0_45", "polars_arrow_0_45"]
 polars_0_46 = ["polars_crate_0_46", "polars_arrow_0_46"]
 polars_0_47 = ["polars_crate_0_47", "polars_arrow_0_47"]
 polars_0_48 = ["polars_crate_0_48", "polars_arrow_0_48"]
+polars_0_49 = ["polars_crate_0_49", "polars_arrow_0_49"]
 arrow_54 = ["arrow_crate_54"]
 arrow_55 = ["arrow_crate_55"]
 
 [dev-dependencies]
-polars_crate_0_48 = { package = "polars", version = "0.48", features = ["lazy", "csv", "is_in"] }
+polars_crate_0_49 = { package = "polars", version = "0.49", features = ["lazy", "csv", "is_in"] }
