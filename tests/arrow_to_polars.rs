@@ -57,6 +57,9 @@ test_arrow_to_polars!("54", "0_48");
 #[cfg(all(feature = "arrow_54", feature = "polars_0_49"))]
 test_arrow_to_polars!("54", "0_49");
 
+#[cfg(all(feature = "arrow_54", feature = "polars_0_50"))]
+test_arrow_to_polars!("54", "0_50");
+
 // ---------- Arrow 0_55 ---------- //
 
 #[cfg(all(feature = "arrow_55", feature = "polars_0_40"))]
@@ -85,3 +88,9 @@ test_arrow_to_polars!("55", "0_47");
 
 #[cfg(all(feature = "arrow_55", feature = "polars_0_48"))]
 test_arrow_to_polars!("55", "0_48");
+
+#[cfg(all(feature = "arrow_55", feature = "polars_0_49"))]
+test_arrow_to_polars!("55", "0_49");
+
+#[cfg(all(feature = "arrow_55", feature = "polars_0_50"))]
+test_arrow_to_polars!("55", "0_50");

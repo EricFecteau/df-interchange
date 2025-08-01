@@ -95,6 +95,9 @@ polars_to_ffi!("0_48");
 #[cfg(feature = "polars_0_49")]
 polars_to_ffi!("0_49");
 
+#[cfg(feature = "polars_0_50")]
+polars_to_ffi!("0_50");
+
 macro_rules! polars_to_ffi {
     ($from_ver:literal) => {
         paste! {
