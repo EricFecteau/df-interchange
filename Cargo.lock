@@ -1084,7 +1084,7 @@ checksum = "85d3cef41d236720ed453e102153a53e4cc3d2fde848c0078a50cf249e8e3e5b"
 
 [[package]]
 name = "df-interchange"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "arrow 54.3.1",
  "arrow 55.2.0",
