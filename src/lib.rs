@@ -7,7 +7,7 @@
 //! This crate allows for seamless interoperability between any version of [Polars (>=0.40)](https://docs.rs/polars/latest/polars/) and any version of [Arrow (>=54)](https://docs.rs/arrow/latest/arrow/), including between versions of the same crate (e.g. `Polars 0.40` to `Polars 0.46`), using the [Arrow C Data Interchange](https://arrow.apache.org/docs/format/CDataInterface.html) format.
 //!
 //! Supported versions:
-//! * Arrow: "54", "55"
+//! * Arrow: "54", "55", "56"
 //! * Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47", "0.48", "0.49", "0.50"
 //!
 //! ## Polars and Arrow Rust ecosystem
@@ -118,7 +118,7 @@
 mod error;
 pub use error::InterchangeError;
 
-#[cfg(any(feature = "arrow_54", feature = "arrow_55"))]
+#[cfg(any(feature = "arrow_54", feature = "arrow_55", feature = "arrow_56"))]
 mod from_arrow;
 
 #[cfg(any(
@@ -136,7 +136,7 @@ mod from_arrow;
 ))]
 mod from_polars;
 
-#[cfg(any(feature = "arrow_54", feature = "arrow_55"))]
+#[cfg(any(feature = "arrow_54", feature = "arrow_55", feature = "arrow_56"))]
 mod to_arrow;
 
 #[cfg(any(

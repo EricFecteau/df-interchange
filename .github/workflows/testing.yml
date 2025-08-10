@@ -42,7 +42,7 @@ jobs:
           args: --features all
 
       - name: Run tests
-        run: cargo clean && just test-ci
+        run: cargo clean && just test-ci && cargo clean
 
       - name: Test build docs
         uses: actions-rs/cargo@v1

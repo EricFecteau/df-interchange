@@ -15,6 +15,7 @@ use std::time::SystemTime;
     feature = "polars_0_50",
     feature = "arrow_54",
     feature = "arrow_55",
+    feature = "arrow_56",
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
@@ -46,8 +47,9 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 
     let arrow_54 = Interchange::from_polars_0_50(df)?.to_arrow_54()?;
     let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
+    let arrow_56 = Interchange::from_arrow_55(arrow_55)?.to_arrow_56()?;
 
-    let polars_0_40 = Interchange::from_arrow_55(arrow_55)?.to_polars_0_40()?;
+    let polars_0_40 = Interchange::from_arrow_56(arrow_56)?.to_polars_0_40()?;
     let polars_0_41 = Interchange::from_polars_0_40(polars_0_40)?.to_polars_0_41()?;
     let polars_0_42 = Interchange::from_polars_0_41(polars_0_41)?.to_polars_0_42()?;
     let polars_0_43 = Interchange::from_polars_0_42(polars_0_42)?.to_polars_0_43()?;

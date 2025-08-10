@@ -30,7 +30,21 @@ macro_rules! test_arrow_to_arrow {
 #[cfg(all(feature = "arrow_54", feature = "arrow_55"))]
 test_arrow_to_arrow!("54", "55");
 
+#[cfg(all(feature = "arrow_54", feature = "arrow_56"))]
+test_arrow_to_arrow!("54", "56");
+
 // ---------- Arrow 55 ---------- //
 
 #[cfg(all(feature = "arrow_55", feature = "arrow_54"))]
 test_arrow_to_arrow!("55", "54");
+
+#[cfg(all(feature = "arrow_55", feature = "arrow_56"))]
+test_arrow_to_arrow!("55", "56");
+
+// ---------- Arrow 56 ---------- //
+
+#[cfg(all(feature = "arrow_56", feature = "arrow_54"))]
+test_arrow_to_arrow!("56", "54");
+
+#[cfg(all(feature = "arrow_56", feature = "arrow_55"))]
+test_arrow_to_arrow!("56", "55");
