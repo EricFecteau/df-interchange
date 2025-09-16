@@ -6,7 +6,7 @@ This crate allows for seamless interoperability between any version of [Polars (
 
 Supported versions:
 * Arrow: "54", "55", "56"
-* Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47", "0.48", "0.49", "0.50"
+* Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47", "0.48", "0.49", "0.50", "0.51"
 
 ## Polars and Arrow Rust ecosystem
 
