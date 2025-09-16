@@ -8,7 +8,7 @@
 //!
 //! Supported versions:
 //! * Arrow: "54", "55", "56"
-//! * Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47", "0.48", "0.49", "0.50"
+//! * Polars: "0.40", "0.41", "0.42", "0.43", "0.44", "0.45", "0.46", "0.47", "0.48", "0.49", "0.50", "0.51"
 //!
 //! ## Polars and Arrow Rust ecosystem
 //!
@@ -132,7 +132,8 @@ mod from_arrow;
     feature = "polars_0_47",
     feature = "polars_0_48",
     feature = "polars_0_49",
-    feature = "polars_0_50"
+    feature = "polars_0_50",
+    feature = "polars_0_51"
 ))]
 mod from_polars;
 
@@ -150,7 +151,8 @@ mod to_arrow;
     feature = "polars_0_47",
     feature = "polars_0_48",
     feature = "polars_0_49",
-    feature = "polars_0_50"
+    feature = "polars_0_50",
+    feature = "polars_0_51"
 ))]
 mod to_polars;
 

@@ -50,6 +50,10 @@ pub enum InterchangeError {
     #[error(transparent)]
     Polars0_50Error(#[from] polars_crate_0_50::error::PolarsError),
 
+    #[cfg(feature = "polars_0_51")]
+    #[error(transparent)]
+    Polars0_51Error(#[from] polars_crate_0_51::error::PolarsError),
+
     #[cfg(feature = "arrow_54")]
     #[error(transparent)]
     Arrow54Error(#[from] arrow_crate_54::error::ArrowError),
