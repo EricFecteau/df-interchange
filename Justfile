@@ -7,7 +7,7 @@ test-large:
     cargo test --features all -j1 --test large
 
 test-ci:
-    cargo test --features all -j1 --test polars_to_arrow --test arrow_to_polars --test polars_to_polars --test arrow_to_arrow
+    cargo test --features "arrow_54 arrow_55 arrow_56 polars_0_49 polars_0_50 polars_0_51" -j1 --test polars_to_arrow --test arrow_to_polars --test polars_to_polars --test arrow_to_arrow
 
 test-all:
     cargo test --features all -j1
