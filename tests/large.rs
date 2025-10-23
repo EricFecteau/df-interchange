@@ -25,29 +25,25 @@ use std::{
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
-    use std::fs;
-
-    use polars_crate_0_51::prelude::{col, lit, IntoLazy, Series};
+    use polars_crate_0_51::prelude::{col, IntoLazy, SortMultipleOptions};
 
     let timer = SystemTime::now();
 
     let lf = load_data();
 
-    let rows: Vec<u64> = (0..2_000_001).step_by(100_000).collect();
-    let pre_rows = lf
+    let pre_interchange = lf
         .clone()
-        .with_row_index("index", None)
-        .filter(col("index").is_in(lit(Series::from_iter(rows.clone())).implode(), false))
+        .group_by([col("occupation_10a")])
+        .agg([col("resident_id_m").count()])
+        .sort(["occupation_10a"], SortMultipleOptions::default())
         .collect()
         .unwrap();
 
-    let pre_weight = lf
-        .clone()
-        .select([col("FINALWT").sum().alias("weight_sum")])
-        .collect()
-        .unwrap();
+    println!("{pre_interchange}");
 
     let df = lf.collect().unwrap();
+
+    let pre_rows = df.shape();
 
     println!("Collecting data: {:?}", timer.elapsed().unwrap().as_secs());
 
@@ -76,36 +72,31 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
         timer.elapsed().unwrap().as_secs()
     );
 
-    let lf = polars_0_51.lazy();
-
-    let post_rows = lf
-        .clone()
-        .with_row_index("index", None)
-        .filter(col("index").is_in(lit(Series::from_iter(rows)).implode(), false))
-        .collect()
-        .unwrap();
+    let post_rows = polars_0_51.shape();
 
     // Print if it fails
-    println!("{}", &pre_rows);
-    println!("{}", &post_rows);
+    println!("{:?}", &pre_rows);
+    println!("{:?}", &post_rows);
 
-    assert!(pre_rows.equals_missing(&post_rows));
+    assert!(pre_rows == post_rows);
 
-    let post_weight = lf
-        .lazy()
-        .clone()
-        .select([col("FINALWT").sum().alias("weight_sum")])
+    let lf = polars_0_51.lazy();
+
+    let post_interchange = lf
+        .group_by([col("occupation_10a")])
+        .agg([col("resident_id_m").count()])
+        .sort(["occupation_10a"], SortMultipleOptions::default())
         .collect()
         .unwrap();
 
     // Delete csv file
-    let _ = fs::remove_file("./data/census.csv");
+    let _ = std::fs::remove_file("./data/census.csv");
 
     // Print if it fails
-    println!("{}", &pre_weight);
-    println!("{}", &post_weight);
+    println!("{}", pre_interchange);
+    println!("{}", post_interchange);
 
-    assert!(pre_weight.equals_missing(&post_weight));
+    assert!(pre_interchange.equals_missing(&post_interchange));
 
     Ok(())
 }
