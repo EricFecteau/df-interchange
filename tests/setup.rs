@@ -168,3 +168,6 @@ create_arrow_data!("55");
 
 #[cfg(feature = "arrow_56")]
 create_arrow_data!("56");
+
+#[cfg(feature = "arrow_57")]
+create_arrow_data!("57");
