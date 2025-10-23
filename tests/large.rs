@@ -1,9 +1,5 @@
 use df_interchange::{Interchange, InterchangeError};
-use std::{
-    fs::File,
-    io::{Read, Write},
-    time::SystemTime,
-};
+use std::time::SystemTime;
 
 #[cfg(all(
     feature = "polars_0_40",
@@ -21,12 +17,9 @@ use std::{
     feature = "arrow_54",
     feature = "arrow_55",
     feature = "arrow_56",
-    feature = "arrow_57",
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
-    use std::fs;
-
     use polars_crate_0_51::prelude::{col, lit, IntoLazy, Series};
 
     let timer = SystemTime::now();
@@ -56,9 +49,8 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let arrow_54 = Interchange::from_polars_0_51(df)?.to_arrow_54()?;
     let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
     let arrow_56 = Interchange::from_arrow_55(arrow_55)?.to_arrow_56()?;
-    let arrow_57 = Interchange::from_arrow_56(arrow_56)?.to_arrow_57()?;
 
-    let polars_0_40 = Interchange::from_arrow_57(arrow_57)?.to_polars_0_40()?;
+    let polars_0_40 = Interchange::from_arrow_56(arrow_56)?.to_polars_0_40()?;
     let polars_0_41 = Interchange::from_polars_0_40(polars_0_40)?.to_polars_0_41()?;
     let polars_0_42 = Interchange::from_polars_0_41(polars_0_41)?.to_polars_0_42()?;
     let polars_0_43 = Interchange::from_polars_0_42(polars_0_42)?.to_polars_0_43()?;
@@ -98,9 +90,6 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
         .collect()
         .unwrap();
 
-    // Delete csv file
-    let _ = fs::remove_file("./data/census.csv");
-
     // Print if it fails
     println!("{}", &pre_weight);
     println!("{}", &post_weight);
@@ -113,22 +102,36 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 fn load_data() -> polars_crate_0_51::prelude::LazyFrame {
     use polars_crate_0_51::prelude::LazyFileListReader;
 
-    // Unzip
-    let zip_file = File::open("./data/data.zip").unwrap();
-    let mut csv_buf: Vec<u8> = Vec::new();
-    let mut archive = zip::ZipArchive::new(zip_file).unwrap();
-    let _ = archive
-        .by_name("census.csv")
-        .unwrap()
-        .read_to_end(&mut csv_buf)
-        .unwrap();
-    let mut file = std::fs::File::create("./data/census.csv").unwrap();
-    file.write_all(&csv_buf).unwrap();
-
-    polars_crate_0_51::prelude::LazyCsvReader::new(polars_crate_0_51::prelude::PlPath::from_string(
-        "./data/census.csv".to_string(),
-    ))
+    // Get schema
+    let schema = polars_crate_0_51::prelude::LazyCsvReader::new(
+        polars_crate_0_51::prelude::PlPath::from_str("./data/csv/pub0120.csv"),
+    )
     .with_has_header(true)
+    .with_infer_schema_length(None)
     .finish()
     .unwrap()
+    .collect_schema()
+    .unwrap();
+
+    // Get all files in folder (all CSVs)
+    let paths = std::fs::read_dir("./data/csv").unwrap();
+
+    let mut lf_vec = vec![];
+
+    for path in paths {
+        let csv = path.unwrap().path().into_os_string().into_string().unwrap();
+
+        let lf = polars_crate_0_51::prelude::LazyCsvReader::new(
+            polars_crate_0_51::prelude::PlPath::from_string(csv),
+        )
+        .with_has_header(true)
+        .with_schema(Some(schema.clone()))
+        .finish()
+        .unwrap();
+
+        lf_vec.push(lf);
+    }
+
+    polars_crate_0_51::prelude::concat(lf_vec, polars_crate_0_51::prelude::UnionArgs::default())
+        .unwrap()
 }
