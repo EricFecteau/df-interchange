@@ -63,3 +63,6 @@ arrow_to_ffi!("55");
 
 #[cfg(feature = "arrow_56")]
 arrow_to_ffi!("56");
+
+#[cfg(feature = "arrow_57")]
+arrow_to_ffi!("57");
