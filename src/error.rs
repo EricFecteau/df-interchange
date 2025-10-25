@@ -66,6 +66,10 @@ pub enum InterchangeError {
     #[error(transparent)]
     Arrow56Error(#[from] arrow_crate_56::error::ArrowError),
 
+    #[cfg(feature = "arrow_57")]
+    #[error(transparent)]
+    Arrow57Error(#[from] arrow_crate_57::error::ArrowError),
+
     #[error("Chunks must be aligned when moving data from Polars to Arrow.")]
     ChunksNotAligned,
 }
