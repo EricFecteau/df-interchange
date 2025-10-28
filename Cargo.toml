@@ -1,6 +1,6 @@
 [package]
 name = "df-interchange"
-version = "0.2.8"
+version = "0.3.0"
 edition = "2021"
 license = "MPL-2.0"
 description = "Seamless interoperability between Polars and Arrow."
@@ -20,63 +20,63 @@ paste = "1"
 thiserror = "2"
 
 # Arrow 54
-arrow_crate_54 = { package = "arrow", version = "54", features = ["ffi"], optional = true}
+arrow_crate_54 = { package = "arrow", version = "54", default-features = false, features = ["ffi"], optional = true}
 
 # Arrow 55
-arrow_crate_55 = { package = "arrow", version = "55", features = ["ffi"], optional = true}
+arrow_crate_55 = { package = "arrow", version = "55", default-features = false, features = ["ffi"], optional = true}
 
 # Arrow 56
-arrow_crate_56 = { package = "arrow", version = "56", features = ["ffi"], optional = true}
+arrow_crate_56 = { package = "arrow", version = "56", default-features = false, features = ["ffi"], optional = true}
 
 # Arrow 57
-arrow_crate_57 = { package = "arrow", version = "57", features = ["ffi"], optional = true}
+arrow_crate_57 = { package = "arrow", version = "57", default-features = false, features = ["ffi"], optional = true}
 
 # Polars 0.40
-polars_crate_0_40 = { package = "polars", version = "0.40", optional = true}
+polars_crate_0_40 = { package = "polars", version = "0.40", default-features = false, optional = true}
 polars_arrow_0_40 = { package = "polars-arrow", version = "0.40", optional = true}
 
 # Polars 0.41
-polars_crate_0_41 = { package = "polars", version = "0.41", optional = true}
+polars_crate_0_41 = { package = "polars", version = "0.41", default-features = false, optional = true}
 polars_arrow_0_41 = { package = "polars-arrow", version = "0.41", optional = true}
 
 # Polars 0.42
-polars_crate_0_42 = { package = "polars", version = "0.42", optional = true}
+polars_crate_0_42 = { package = "polars", version = "0.42", default-features = false, optional = true}
 polars_arrow_0_42 = { package = "polars-arrow", version = "0.42", optional = true}
 
 # Polars 0.43
-polars_crate_0_43 = { package = "polars", version = "0.43", optional = true}
+polars_crate_0_43 = { package = "polars", version = "0.43", default-features = false, optional = true}
 polars_arrow_0_43 = { package = "polars-arrow", version = "0.43", optional = true}
 
 # Polars 0.44
-polars_crate_0_44 = { package = "polars", version = "0.44", optional = true}
+polars_crate_0_44 = { package = "polars", version = "0.44", default-features = false, optional = true}
 polars_arrow_0_44 = { package = "polars-arrow", version = "0.44", optional = true}
 
 # Polars 0.45
-polars_crate_0_45 = { package = "polars", version = "0.45", optional = true}
+polars_crate_0_45 = { package = "polars", version = "0.45", default-features = false, optional = true}
 polars_arrow_0_45 = { package = "polars-arrow", version = "0.45", optional = true}
 
 # Polars 0.46
-polars_crate_0_46 = { package = "polars", version = "0.46", optional = true}
+polars_crate_0_46 = { package = "polars", version = "0.46", default-features = false, optional = true}
 polars_arrow_0_46 = { package = "polars-arrow", version = "0.46", optional = true}
 
 # Polars 0.47
-polars_crate_0_47 = { package = "polars", version = "0.47", optional = true}
+polars_crate_0_47 = { package = "polars", version = "0.47", default-features = false, optional = true}
 polars_arrow_0_47 = { package = "polars-arrow", version = "0.47", optional = true}
 
 # Polars 0.48
-polars_crate_0_48 = { package = "polars", version = "0.48", optional = true}
+polars_crate_0_48 = { package = "polars", version = "0.48", default-features = false, optional = true}
 polars_arrow_0_48 = { package = "polars-arrow", version = "0.48", optional = true}
 
 # Polars 0.49
-polars_crate_0_49 = { package = "polars", version = "0.49", optional = true}
+polars_crate_0_49 = { package = "polars", version = "0.49", default-features = false, optional = true}
 polars_arrow_0_49 = { package = "polars-arrow", version = "0.49", optional = true}
 
 # Polars 0.50
-polars_crate_0_50 = { package = "polars", version = "0.50", optional = true}
+polars_crate_0_50 = { package = "polars", version = "0.50", default-features = false, optional = true}
 polars_arrow_0_50 = { package = "polars-arrow", version = "0.50", optional = true}
 
 # Polars 0.51
-polars_crate_0_51 = { package = "polars", version = "0.51", optional = true}
+polars_crate_0_51 = { package = "polars", version = "0.51", default-features = false, optional = true}
 polars_arrow_0_51 = { package = "polars-arrow", version = "0.51", optional = true}
 
 [features]
