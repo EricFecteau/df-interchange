@@ -79,9 +79,15 @@ polars_arrow_0_50 = { package = "polars-arrow", version = "0.50", optional = tru
 polars_crate_0_51 = { package = "polars", version = "0.51", default-features = false, optional = true}
 polars_arrow_0_51 = { package = "polars-arrow", version = "0.51", optional = true}
 
+# Polars 0.52
+polars_crate_0_52 = { package = "polars", version = "0.52", default-features = false, optional = true}
+polars_arrow_0_52 = { package = "polars-arrow", version = "0.52", optional = true}
+
 [features]
 all = ["all_polars", "all_arrow"]
-all_polars = ["polars_0_40", "polars_0_41", "polars_0_42", "polars_0_43", "polars_0_44", "polars_0_45", "polars_0_46", "polars_0_47", "polars_0_48", "polars_0_49", "polars_0_50", "polars_0_51"]
+all_polars = ["polars_0_40", "polars_0_41", "polars_0_42", "polars_0_43", "polars_0_44", "polars_0_45",
+              "polars_0_46", "polars_0_47", "polars_0_48", "polars_0_49", "polars_0_50", "polars_0_51", 
+              "polars_0_52"]
 all_arrow = ["arrow_54", "arrow_55", "arrow_56", "arrow_57"]
 polars_0_40 = ["polars_crate_0_40", "polars_arrow_0_40"]
 polars_0_41 = ["polars_crate_0_41", "polars_arrow_0_41"]
@@ -95,6 +101,7 @@ polars_0_48 = ["polars_crate_0_48", "polars_arrow_0_48"]
 polars_0_49 = ["polars_crate_0_49", "polars_arrow_0_49"]
 polars_0_50 = ["polars_crate_0_50", "polars_arrow_0_50"]
 polars_0_51 = ["polars_crate_0_51", "polars_arrow_0_51"]
+polars_0_52 = ["polars_crate_0_52", "polars_arrow_0_52"]
 arrow_54 = ["arrow_crate_54"]
 arrow_55 = ["arrow_crate_55"]
 arrow_56 = ["arrow_crate_56"]
@@ -102,4 +109,4 @@ arrow_57 = ["arrow_crate_57"]
 
 [dev-dependencies]
 zip = "6"
-polars_crate_0_51 = { package = "polars", version = "0.51", features = ["lazy", "csv", "is_in"] }
+polars_crate_0_52 = { package = "polars", version = "0.52", features = ["lazy", "csv", "is_in"] }
