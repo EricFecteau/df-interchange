@@ -109,4 +109,4 @@ arrow_57 = ["arrow_crate_57"]
 
 [dev-dependencies]
 zip = "6"
-polars_crate_0_52 = { package = "polars", version = "0.52", features = ["lazy", "csv", "is_in"] }
+polars_crate_0_52 = { package = "polars", version = "0.52", features = ["lazy", "csv", "is_in", "timezones"] }
