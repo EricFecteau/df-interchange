@@ -60,6 +60,9 @@ test_polars_to_polars!("0_40", "0_50");
 #[cfg(all(feature = "polars_0_40", feature = "polars_0_51"))]
 test_polars_to_polars!("0_40", "0_51");
 
+#[cfg(all(feature = "polars_0_40", feature = "polars_0_52"))]
+test_polars_to_polars!("0_40", "0_52");
+
 // ---------- Polars 0_41 ---------- //
 
 #[cfg(all(feature = "polars_0_41", feature = "polars_0_40"))]
@@ -94,6 +97,9 @@ test_polars_to_polars!("0_41", "0_50");
 
 #[cfg(all(feature = "polars_0_41", feature = "polars_0_51"))]
 test_polars_to_polars!("0_41", "0_51");
+
+#[cfg(all(feature = "polars_0_41", feature = "polars_0_52"))]
+test_polars_to_polars!("0_41", "0_52");
 
 // ---------- Polars 0_42 ---------- //
 
@@ -130,6 +136,9 @@ test_polars_to_polars!("0_42", "0_50");
 #[cfg(all(feature = "polars_0_42", feature = "polars_0_51"))]
 test_polars_to_polars!("0_42", "0_51");
 
+#[cfg(all(feature = "polars_0_42", feature = "polars_0_52"))]
+test_polars_to_polars!("0_42", "0_52");
+
 // ---------- Polars 0_43 ---------- //
 
 #[cfg(all(feature = "polars_0_43", feature = "polars_0_40"))]
@@ -164,6 +173,9 @@ test_polars_to_polars!("0_43", "0_50");
 
 #[cfg(all(feature = "polars_0_43", feature = "polars_0_51"))]
 test_polars_to_polars!("0_43", "0_51");
+
+#[cfg(all(feature = "polars_0_43", feature = "polars_0_52"))]
+test_polars_to_polars!("0_43", "0_52");
 
 // ---------- Polars 0_44 ---------- //
 
@@ -200,6 +212,9 @@ test_polars_to_polars!("0_44", "0_50");
 #[cfg(all(feature = "polars_0_44", feature = "polars_0_51"))]
 test_polars_to_polars!("0_44", "0_51");
 
+#[cfg(all(feature = "polars_0_44", feature = "polars_0_52"))]
+test_polars_to_polars!("0_44", "0_52");
+
 // ---------- Polars 0_45 ---------- //
 
 #[cfg(all(feature = "polars_0_45", feature = "polars_0_40"))]
@@ -234,6 +249,9 @@ test_polars_to_polars!("0_45", "0_50");
 
 #[cfg(all(feature = "polars_0_45", feature = "polars_0_51"))]
 test_polars_to_polars!("0_45", "0_51");
+
+#[cfg(all(feature = "polars_0_45", feature = "polars_0_52"))]
+test_polars_to_polars!("0_45", "0_52");
 
 // ---------- Polars 0_46 ---------- //
 
@@ -270,6 +288,9 @@ test_polars_to_polars!("0_46", "0_50");
 #[cfg(all(feature = "polars_0_46", feature = "polars_0_51"))]
 test_polars_to_polars!("0_46", "0_51");
 
+#[cfg(all(feature = "polars_0_46", feature = "polars_0_52"))]
+test_polars_to_polars!("0_46", "0_52");
+
 // ---------- Polars 0_47 ---------- //
 
 #[cfg(all(feature = "polars_0_47", feature = "polars_0_40"))]
@@ -304,6 +325,9 @@ test_polars_to_polars!("0_47", "0_50");
 
 #[cfg(all(feature = "polars_0_47", feature = "polars_0_51"))]
 test_polars_to_polars!("0_47", "0_51");
+
+#[cfg(all(feature = "polars_0_47", feature = "polars_0_52"))]
+test_polars_to_polars!("0_47", "0_52");
 
 // ---------- Polars 0_48 ---------- //
 
@@ -340,6 +364,9 @@ test_polars_to_polars!("0_48", "0_50");
 #[cfg(all(feature = "polars_0_48", feature = "polars_0_51"))]
 test_polars_to_polars!("0_48", "0_51");
 
+#[cfg(all(feature = "polars_0_48", feature = "polars_0_52"))]
+test_polars_to_polars!("0_48", "0_52");
+
 // ---------- Polars 0_49 ---------- //
 
 #[cfg(all(feature = "polars_0_49", feature = "polars_0_40"))]
@@ -374,6 +401,9 @@ test_polars_to_polars!("0_49", "0_50");
 
 #[cfg(all(feature = "polars_0_49", feature = "polars_0_51"))]
 test_polars_to_polars!("0_49", "0_51");
+
+#[cfg(all(feature = "polars_0_49", feature = "polars_0_52"))]
+test_polars_to_polars!("0_49", "0_52");
 
 // ---------- Polars 0_50 ---------- //
 
@@ -410,6 +440,9 @@ test_polars_to_polars!("0_50", "0_49");
 #[cfg(all(feature = "polars_0_50", feature = "polars_0_51"))]
 test_polars_to_polars!("0_50", "0_51");
 
+#[cfg(all(feature = "polars_0_50", feature = "polars_0_52"))]
+test_polars_to_polars!("0_50", "0_52");
+
 // ---------- Polars 0_51 ---------- //
 
 #[cfg(all(feature = "polars_0_51", feature = "polars_0_40"))]
@@ -444,3 +477,44 @@ test_polars_to_polars!("0_51", "0_49");
 
 #[cfg(all(feature = "polars_0_51", feature = "polars_0_50"))]
 test_polars_to_polars!("0_51", "0_50");
+
+#[cfg(all(feature = "polars_0_51", feature = "polars_0_52"))]
+test_polars_to_polars!("0_51", "0_52");
+
+// ---------- Polars 0_52 ---------- //
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_40"))]
+test_polars_to_polars!("0_52", "0_40");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_41"))]
+test_polars_to_polars!("0_52", "0_41");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_42"))]
+test_polars_to_polars!("0_52", "0_42");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_43"))]
+test_polars_to_polars!("0_52", "0_43");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_44"))]
+test_polars_to_polars!("0_52", "0_44");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_45"))]
+test_polars_to_polars!("0_52", "0_45");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_46"))]
+test_polars_to_polars!("0_52", "0_46");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_47"))]
+test_polars_to_polars!("0_52", "0_47");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_48"))]
+test_polars_to_polars!("0_52", "0_48");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_49"))]
+test_polars_to_polars!("0_52", "0_49");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_50"))]
+test_polars_to_polars!("0_52", "0_50");
+
+#[cfg(all(feature = "polars_0_52", feature = "polars_0_51"))]
+test_polars_to_polars!("0_52", "0_51");
