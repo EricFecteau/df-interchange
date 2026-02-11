@@ -48,13 +48,15 @@ macro_rules! ffi_to_polars {
                             chunks.push(array);
                         }
 
-                        // Create series out of vec of chunks
-                        columns.push([<polars_crate_ $to_ver>]::frame::column::Column::from(
+                        // Convert series to column
+                        let column = [<polars_crate_ $to_ver>]::frame::column::Column::from(
                             [<polars_crate_ $to_ver>]::series::Series::from_arrow_chunks(
                                 name.into(),
                                 chunks,
-                            )?),
-                        );
+                            )?);
+
+                        // Put column in columns vec
+                        columns.push(column);
 
 
                     }
