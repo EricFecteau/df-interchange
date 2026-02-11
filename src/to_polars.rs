@@ -12,6 +12,75 @@ macro_rules! ffi_to_polars {
 
                     // Prepare series vec
                     let num_cols = self.ffi.len();
+                    let mut columns = Vec::with_capacity(num_cols);
+
+                    // For columns in the ffi
+                    for s in self.ffi {
+
+                        // Prepare chunks vec
+                        let num_chunks = s.1.len();
+                        let mut chunks = Vec::with_capacity(num_chunks);
+
+                        // Get name of column
+                        let name = s.0;
+
+                        // For chunk in column
+                        for c in s.1 {
+
+                            // Convert ffi array from this crate's version of ArrowArray to polars-arrow
+                            let ffi_array = unsafe { transmute::<ArrowArray,  [<polars_arrow_ $to_ver>]::ffi::ArrowArray>(c.0) };
+
+                            // Convert ffi field from this crate's version of ArrowField to polars-arrow
+                            let ffi_field = unsafe { transmute::<ArrowSchema,  [<polars_arrow_ $to_ver>]::ffi::ArrowSchema>(c.1) };
+
+                            // Convert ffi to field
+                            let field = unsafe {
+                                [<polars_arrow_ $to_ver>]::ffi::import_field_from_c(&ffi_field)
+                            }?;
+
+                            // Convert ffi to chunk
+                            let array = unsafe {
+                                [<polars_arrow_ $to_ver>]::ffi::import_array_from_c(ffi_array, field.dtype().clone(),
+                                )
+                            }?;
+
+                            // Add the chunks to the vec of chunks
+                            chunks.push(array);
+                        }
+
+                        // Convert series to column
+                        let column = [<polars_crate_ $to_ver>]::frame::column::Column::from(
+                            [<polars_crate_ $to_ver>]::series::Series::from_arrow_chunks(
+                                name.into(),
+                                chunks,
+                            )?);
+
+                        // Put column in columns vec
+                        columns.push(column);
+
+
+                    }
+
+                    // Create DataFrame out of Vec of series
+                    Ok([<polars_crate_ $to_ver>]::frame::DataFrame::new_infer_height(columns)?)
+                }
+            }
+        }
+    };
+}
+
+#[cfg(feature = "polars_0_53")]
+ffi_to_polars!("0_53");
+
+macro_rules! ffi_to_polars {
+    ($to_ver:literal) => {
+        paste! {
+            impl Interchange {
+                #[doc = "Move Arrow data interchange format to Polars version `" $to_ver "`."]
+                pub fn [<to_polars_ $to_ver>](self) -> Result<[<polars_crate_ $to_ver>]::frame::DataFrame, InterchangeError> {
+
+                    // Prepare series vec
+                    let num_cols = self.ffi.len();
                     let mut series = Vec::with_capacity(num_cols);
 
                     // For columns in the ffi
