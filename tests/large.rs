@@ -19,6 +19,7 @@ use std::{
     feature = "polars_0_50",
     feature = "polars_0_51",
     feature = "polars_0_52",
+    feature = "polars_0_53",
     feature = "arrow_54",
     feature = "arrow_55",
     feature = "arrow_56",
@@ -26,7 +27,7 @@ use std::{
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
-    use polars_crate_0_52::prelude::{col, IntoLazy, SortMultipleOptions};
+    use polars_crate_0_53::prelude::{col, IntoLazy, SortMultipleOptions};
 
     let timer = SystemTime::now();
 
@@ -50,7 +51,7 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 
     let timer = SystemTime::now();
 
-    let arrow_54 = Interchange::from_polars_0_52(df)?.to_arrow_54()?;
+    let arrow_54 = Interchange::from_polars_0_53(df)?.to_arrow_54()?;
     let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
     let arrow_56 = Interchange::from_arrow_55(arrow_55)?.to_arrow_56()?;
     let arrow_57 = Interchange::from_arrow_56(arrow_56)?.to_arrow_57()?;
@@ -68,13 +69,14 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let polars_0_50 = Interchange::from_polars_0_49(polars_0_49)?.to_polars_0_50()?;
     let polars_0_51 = Interchange::from_polars_0_50(polars_0_50)?.to_polars_0_51()?;
     let polars_0_52 = Interchange::from_polars_0_51(polars_0_51)?.to_polars_0_52()?;
+    let polars_0_53 = Interchange::from_polars_0_52(polars_0_52)?.to_polars_0_53()?;
 
     println!(
         "Moving data between versions: {:?}",
         timer.elapsed().unwrap().as_secs()
     );
 
-    let post_rows = polars_0_52.shape();
+    let post_rows = polars_0_53.shape();
 
     // Print if it fails
     println!("{:?}", &pre_rows);
@@ -82,7 +84,7 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
 
     assert!(pre_rows == post_rows);
 
-    let lf = polars_0_52.lazy();
+    let lf = polars_0_53.lazy();
 
     let post_interchange = lf
         .group_by([col("occupation_10a")])
@@ -103,8 +105,8 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     Ok(())
 }
 
-fn load_data() -> polars_crate_0_52::prelude::LazyFrame {
-    use polars_crate_0_52::prelude::LazyFileListReader;
+fn load_data() -> polars_crate_0_53::prelude::LazyFrame {
+    use polars_crate_0_53::prelude::LazyFileListReader;
 
     // Unzip
     let zip_file = File::open("./data/data.zip").unwrap();
@@ -118,8 +120,8 @@ fn load_data() -> polars_crate_0_52::prelude::LazyFrame {
     let mut file = std::fs::File::create("./data/census.csv").unwrap();
     file.write_all(&csv_buf).unwrap();
 
-    polars_crate_0_52::prelude::LazyCsvReader::new(polars_crate_0_52::prelude::PlPath::from_string(
-        "./data/census.csv".to_string(),
+    polars_crate_0_53::prelude::LazyCsvReader::new(polars_crate_0_53::prelude::PlRefPath::from(
+        "./data/census.csv",
     ))
     .with_has_header(true)
     .finish()

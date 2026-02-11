@@ -141,6 +141,31 @@ create_polars_data!("0_51");
 #[cfg(feature = "polars_0_52")]
 create_polars_data!("0_52");
 
+macro_rules! create_polars_data {
+    ($version:literal) => {
+        paste! {
+            pub fn [<polars_data_ $version>]() -> [<polars_crate_ $version>]::frame::DataFrame {
+
+                let df_vec = vec![
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_i32".into(), TEST_I32),
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_i64".into(), TEST_I64),
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_u32".into(), TEST_U32),
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_u64".into(), TEST_U64),
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_f32".into(), TEST_F32),
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_f64".into(), TEST_F64),
+                    [<polars_crate_ $version>]::frame::column::Column::new("test_bool".into(), TEST_BOOL),
+                ];
+
+                [<polars_crate_ $version>]::frame::DataFrame::new_infer_height(df_vec).unwrap()
+            }
+
+        }
+    };
+}
+
+#[cfg(feature = "polars_0_53")]
+create_polars_data!("0_53");
+
 macro_rules! create_arrow_data {
     ($version:literal) => {
         paste! {
