@@ -31,6 +31,9 @@ arrow_crate_56 = { package = "arrow", version = "56", default-features = false, 
 # Arrow 57
 arrow_crate_57 = { package = "arrow", version = "57", default-features = false, features = ["ffi"], optional = true}
 
+# Arrow 58
+arrow_crate_58 = { package = "arrow", version = "58", default-features = false, features = ["ffi"], optional = true}
+
 # Polars 0.40
 polars_crate_0_40 = { package = "polars", version = "0.40", default-features = false, optional = true}
 polars_arrow_0_40 = { package = "polars-arrow", version = "0.40", optional = true}
@@ -92,7 +95,7 @@ all = ["all_polars", "all_arrow"]
 all_polars = ["polars_0_40", "polars_0_41", "polars_0_42", "polars_0_43", "polars_0_44", "polars_0_45",
               "polars_0_46", "polars_0_47", "polars_0_48", "polars_0_49", "polars_0_50", "polars_0_51", 
               "polars_0_52", "polars_0_53"]
-all_arrow = ["arrow_54", "arrow_55", "arrow_56", "arrow_57"]
+all_arrow = ["arrow_54", "arrow_55", "arrow_56", "arrow_57", "arrow_58"]
 polars_0_40 = ["polars_crate_0_40", "polars_arrow_0_40"]
 polars_0_41 = ["polars_crate_0_41", "polars_arrow_0_41"]
 polars_0_42 = ["polars_crate_0_42", "polars_arrow_0_42"]
@@ -111,6 +114,7 @@ arrow_54 = ["arrow_crate_54"]
 arrow_55 = ["arrow_crate_55"]
 arrow_56 = ["arrow_crate_56"]
 arrow_57 = ["arrow_crate_57"]
+arrow_58 = ["arrow_crate_58"]
 
 [dev-dependencies]
 zip = "6"
