@@ -31,7 +31,7 @@ jobs:
         run: cargo fmt --all -- --check -q
 
       - name: Clippy linting
-        run: clippy --features all
+        run: cargo clippy --features all
 
       - name: Run tests
         run: cargo clean && just test-ci && cargo clean
