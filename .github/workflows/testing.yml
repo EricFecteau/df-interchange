@@ -21,31 +21,20 @@ jobs:
           apt-get install -y curl build-essential
 
       - name: Install Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
-          components: rustfmt
-          default: true
+          components: rustfmt, clippy
 
       - uses: extractions/setup-just@v2
 
       - name: Verify code formatting
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check -q
+        run: cargo fmt --all -- --check -q
 
       - name: Clippy linting
-        uses: actions-rs/cargo@v1
-        with:
-          command: clippy
-          args: --features all
+        run: cargo clippy --features all
 
       - name: Run tests
         run: cargo clean && just test-ci && cargo clean
 
       - name: Test build docs
-        uses: actions-rs/cargo@v1
-        with:
-          command: doc
-          args: --no-deps --features all
+        run: cargo doc --no-deps --features all
