@@ -24,6 +24,7 @@ use std::{
     feature = "arrow_55",
     feature = "arrow_56",
     feature = "arrow_57",
+    feature = "arrow_58",
 ))]
 #[test]
 pub fn test_large_data() -> Result<(), InterchangeError> {
@@ -55,8 +56,9 @@ pub fn test_large_data() -> Result<(), InterchangeError> {
     let arrow_55 = Interchange::from_arrow_54(arrow_54)?.to_arrow_55()?;
     let arrow_56 = Interchange::from_arrow_55(arrow_55)?.to_arrow_56()?;
     let arrow_57 = Interchange::from_arrow_56(arrow_56)?.to_arrow_57()?;
+    let arrow_58 = Interchange::from_arrow_57(arrow_57)?.to_arrow_58()?;
 
-    let polars_0_40 = Interchange::from_arrow_57(arrow_57)?.to_polars_0_40()?;
+    let polars_0_40 = Interchange::from_arrow_58(arrow_58)?.to_polars_0_40()?;
     let polars_0_41 = Interchange::from_polars_0_40(polars_0_40)?.to_polars_0_41()?;
     let polars_0_42 = Interchange::from_polars_0_41(polars_0_41)?.to_polars_0_42()?;
     let polars_0_43 = Interchange::from_polars_0_42(polars_0_42)?.to_polars_0_43()?;

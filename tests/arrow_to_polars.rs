@@ -200,3 +200,47 @@ test_arrow_to_polars!("57", "0_52");
 
 #[cfg(all(feature = "arrow_57", feature = "polars_0_53"))]
 test_arrow_to_polars!("57", "0_53");
+
+// ---------- Arrow 0_58 ---------- //
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_40"))]
+test_arrow_to_polars!("58", "0_40");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_41"))]
+test_arrow_to_polars!("58", "0_41");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_42"))]
+test_arrow_to_polars!("58", "0_42");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_43"))]
+test_arrow_to_polars!("58", "0_43");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_44"))]
+test_arrow_to_polars!("58", "0_44");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_45"))]
+test_arrow_to_polars!("58", "0_45");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_46"))]
+test_arrow_to_polars!("58", "0_46");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_47"))]
+test_arrow_to_polars!("58", "0_47");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_48"))]
+test_arrow_to_polars!("58", "0_48");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_49"))]
+test_arrow_to_polars!("58", "0_49");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_50"))]
+test_arrow_to_polars!("58", "0_50");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_51"))]
+test_arrow_to_polars!("58", "0_51");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_52"))]
+test_arrow_to_polars!("58", "0_52");
+
+#[cfg(all(feature = "arrow_58", feature = "polars_0_53"))]
+test_arrow_to_polars!("58", "0_53");
